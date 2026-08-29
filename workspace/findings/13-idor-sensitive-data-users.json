@@ -1,0 +1,26 @@
+{
+  "id": "finding-012",
+  "title": "IDOR and Sensitive Data Exposure in User Routes - GET /users and GET /users/:id",
+  "description": "The GET /api/v1/users and GET /api/v1/users/:id endpoints in the vulnerable API expose sensitive user data including the passwordHash field (Argon2id hash). The GET /users endpoint returns a list of all users with their passwordHash fields exposed in the response. The GET /users/:id endpoint exposes the passwordHash of a specific user. Additionally, the GET /users/:id endpoint lacks ownership validation, allowing any authenticated user to access any other user's data including their password hash.",
+  "impact": "Full password hash exfiltration. An authenticated attacker can retrieve Argon2id password hashes for all users in the system via GET /api/v1/users, or target specific users via GET /users/:id. Argon2id hashes can be subjected to offline brute-force or dictionary attacks (GPU: ~10k H/s per GPU). Combined with IDOR on GET /users/:id, any authenticated user can extract password hashes of all other users including ADMINs.",
+  "severity": "CRITICAL",
+  "privileges_required": "LOW",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "NONE",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": ["packages/api-vulnerable/src/api/v1/users.routes.ts:31-63", "packages/api-vulnerable/src/api/v1/users.routes.ts:63-95"],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-200, CWE-639",
+  "signature": "f6a7b8c9d0e1f2a3",
+  "lineage_id": "00000000-0000-0000-0000-000000000013",
+  "mitigation": "1) Explicitly exclude passwordHash from all user response DTOs in both list and single user endpoints. 2) Implement ownership validation on GET /users/:id to restrict users to their own data (similar to customer ownership checks). 3) Ensure passwordHash is never serialized in API responses by using DTOs that exclude this field. Contrast with secure implementation in api-secure which explicitly excludes passwordHash from response DTOs.",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for IDOR and sensitive data exposure in user routes",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}

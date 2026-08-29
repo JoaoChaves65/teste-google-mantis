@@ -1,0 +1,26 @@
+{
+  "id": "finding-019",
+  "title": "Mass Assignment - Service Active Status Manipulation via PATCH /api/v1/services/:id",
+  "description": "The PATCH /api/v1/services/:id endpoint in the vulnerable API accepts an 'active' field in the request body through the updateServiceSchema Zod schema. The schema includes 'active: z.boolean().optional()'. The handler passes the entire parsed data (including active) to the UpdateService use case. This allows any authenticated user with access to this endpoint (currently any authenticated user due to missing RBAC) to activate or deactivate any service by ID.",
+  "impact": "Service availability manipulation. Any authenticated user can activate or deactivate any service, affecting customer-facing service availability, pricing visibility, and booking capabilities. This could be used for denial of service against specific services or to hide malicious services.",
+  "severity": "MEDIUM",
+  "privileges_required": "LOW",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "NONE",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": ["packages/api-vulnerable/src/api/v1/services.routes.ts:129-164"],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-915",
+  "signature": "f6a7b8c9d0e1f2a3",
+  "lineage_id": "00000000-0000-0000-0000-000000000020",
+  "mitigation": "1) Remove 'active' field from updateServiceSchema in vulnerable API (secure API already excludes it). 2) The UpdateService use case should not accept active status changes from client input. 3. Service activation/deactivation should be a separate administrative action with proper authorization.",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for mass assignment of active in service update",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "finding-014",
+  "title": "Mass Assignment - Customer Role Escalation via POST /api/v1/customers",
+  "description": "The POST /api/v1/customers endpoint in the vulnerable API accepts a 'role' field in the request body through the createCustomerSchema Zod schema. The schema explicitly includes 'role: z.string().optional()' field. The handler extracts the role from the parsed data and passes it to the CreateCustomer use case via the input object. This allows a BARBER (who has access to this endpoint) to create customers with arbitrary roles including 'ADMIN'.",
+  "impact": "Privilege escalation via customer creation. A BARBER (or any authenticated user with access to this endpoint) can create customer accounts with ADMIN role, leading to full system compromise. The created ADMIN user can then access all administrative endpoints.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "NONE",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": ["packages/api-vulnerable/src/api/v1/customers.routes.ts:109-141"],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-915",
+  "signature": "d4e5f6a7b8c9d0e1",
+  "lineage_id": "00000000-0000-0000-0000-000000000015",
+  "mitigation": "1) Remove 'role' field from createCustomerSchema in vulnerable API (already fixed in secure API). 2) In secure API, the createCustomerSchema explicitly omits 'role' field. 3) The CreateCustomer use case should derive the role from the authenticated user's context (only ADMIN can assign roles). 4) The domain's createCustomer function should default role to 'CUSTOMER' and only ADMIN should be able to override via separate administrative interface.",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for mass assignment of role in customer creation",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}

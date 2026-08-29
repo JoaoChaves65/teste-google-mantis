@@ -1,0 +1,32 @@
+{
+  "id": "finding-020",
+  "title": "Broken RBAC - Vulnerable RequireRole Middleware Logic Flaw",
+  "description": "The vulnerableRequireRole middleware in api-vulnerable has flawed logic that allows CUSTOMER role to access endpoints meant for ADMIN when CUSTOMER is included in the allowedRoles array. The middleware logic checks if the user's role is in the allowedRoles array, but for admin endpoints that only specify 'ADMIN' in allowedRoles, the middleware correctly rejects CUSTOMER. However, the actual vulnerability is that many admin endpoints DON'T use the middleware at all (missing RBAC entirely), and some endpoints that do use it incorrectly include CUSTOMER/BARBER in allowedRoles for admin endpoints.",
+  "impact": "Role-based access control bypass. CUSTOMER and BARBER roles can access ADMIN-only endpoints (user management, transaction listing, service/barber creation) because either the middleware is missing or incorrectly configured with overly permissive allowedRoles.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "NONE",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": [
+    "packages/api-vulnerable/src/http/middleware/vulnerableRbac.ts",
+    "packages/api-vulnerable/src/api/v1/users.routes.ts",
+    "packages/api-vulnerable/src/api/v1/transactions.routes.ts",
+    "packages/api-vulnerable/src/api/v1/barbers.routes.ts",
+    "packages/api-vulnerable/src/api/v1/services.routes.ts"
+  ],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-285",
+  "signature": "a1b2c3d4e5f6a7b8",
+  "lineage_id": "00000000-0000-0000-0000-000000000021",
+  "mitigation": "1) Apply proper RBAC middleware to ALL routes (not just some). 2) Use secure requireAdmin/requireRole middleware from api-secure which strictly checks userRole against allowedRoles without fallback logic. 3) Apply requireAdmin middleware to all admin-only routes. 4) Implement ownership checks for resource-specific access (checkCustomerAccess, checkBarberAccess).",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for broken RBAC implementation",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}

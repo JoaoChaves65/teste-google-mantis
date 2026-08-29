@@ -1,0 +1,26 @@
+{
+  "id": "finding-008",
+  "title": "IDOR in Customer Routes - PATCH /customers/:id",
+  "description": "The PATCH /api/v1/customers/:id endpoint allows any authenticated CUSTOMER to update any other customer's data by simply providing a different customer ID in the URL. The vulnerableRequireRole middleware permits CUSTOMER role for this endpoint, but there is no ownership validation to ensure the requesting customer owns the customer resource being updated.",
+  "impact": "Cross-customer data manipulation. A malicious customer can modify another customer's personal information including name, phone, email, birth date, and notes by simply providing a different customer ID in the URL path.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "NONE",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": ["packages/api-vulnerable/src/api/v1/customers.routes.ts:154-207"],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-639",
+  "signature": "c3d4e5f6a7b8c9d0",
+  "lineage_id": "00000000-0000-0000-0000-000000000009",
+  "mitigation": "Implement ownership validation middleware (checkCustomerAccess) that verifies the requesting customer's userId matches the target customer's userId, or that the user has ADMIN/BARBER role with appropriate permissions. Compare with secure implementation in customer_routes_secure.ts which uses checkCustomerAccess middleware.",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for IDOR in PATCH /customers/:id endpoint",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}

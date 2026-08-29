@@ -1,0 +1,26 @@
+{
+  "id": "finding-028",
+  "title": "Sensitive Data Exposure - Refresh Token Exposure in POST /api/v1/auth/login",
+  "description": "The POST /api/v1/auth/login endpoint in the vulnerable API returns the refresh token directly in the JSON response body. The login handler returns the full token pair (accessToken and refreshToken) in the JSON response body. The refresh token is a long-lived token (7 days expiry) that can be used to obtain new access tokens. Exposing it in the response body allows any attacker who intercepts the login response (MITM, XSS, log leakage) to obtain the refresh token and maintain persistent access to the victim's account.",
+  "impact": "Refresh token theft leading to persistent account access. An attacker who obtains the refresh token (via MITM, XSS, log leakage) can use it to generate new access tokens indefinitely (until token rotation or revocation). The refresh token has a 7-day expiry, providing a long window for abuse.",
+  "severity": "HIGH",
+  "privileges_required": "NONE",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "REQUIRED",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": ["packages/api-vulnerable/src/auth/routes.ts:69-70"],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-200",
+  "signature": "p6q7r8s9t0u1v2w3",
+  "lineage_id": "00000000-0000-0000-0000-000000000029",
+  "mitigation": "1) Never return refresh tokens in HTTP response bodies. 2) Set refresh tokens exclusively in HttpOnly, Secure, SameSite=Strict cookies. 3) Secure API (api-secure) implements this by setting refresh token in HttpOnly cookie and only returning accessToken in response body. 4) Implement token rotation and revocation checking.",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for refresh token exposure in login response",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}

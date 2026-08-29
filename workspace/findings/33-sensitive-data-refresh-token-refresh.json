@@ -1,0 +1,26 @@
+{
+  "id": "finding-029",
+  "title": "Sensitive Data Exposure - Refresh Token Exposure in POST /api/v1/auth/refresh",
+  "description": "The POST /api/v1/auth/refresh endpoint in the vulnerable API returns the refresh token directly in the JSON response body. The refresh handler returns both the new access token and the new refresh token in the JSON response body. This exposes the new refresh token to any attacker who can intercept the response (MITM, XSS, log leakage), allowing them to obtain a new valid refresh token and maintain persistent access.",
+  "impact": "Refresh token theft leading to persistent access. An attacker who intercepts the refresh response can obtain the new refresh token and use it to generate new access tokens indefinitely (until rotation or revocation). The refresh token has a 7-day expiry, providing a long window for abuse.",
+  "severity": "HIGH",
+  "privileges_required": "NONE",
+  "attacker_position": "EXTERNAL",
+  "user_interaction": "REQUIRED",
+  "status": "PROVISIONALLY_VALID",
+  "code_paths": ["packages/api-vulnerable/src/auth/routes.ts:80-85"],
+  "discovery_commit": "snap_20250829_01",
+  "cwe": "CWE-200",
+  "signature": "q7r8s9t0u1v2w3x4",
+  "lineage_id": "00000000-0000-0000-0000-000000000030",
+  "mitigation": "1) Never return refresh tokens in HTTP response bodies. 2) Set refresh tokens exclusively in HttpOnly, Secure, SameSite=Strict cookies. 3) Secure API (api-secure) implements this by setting refresh token in HttpOnly cookie and only returning accessToken in response body. 4) Implement token rotation and revocation checking.",
+  "history": [
+    {
+      "stage": "researcher",
+      "action": "created",
+      "details": "Initial audit finding recorded for refresh token exposure in refresh response",
+      "pass_number": 2,
+      "timestamp": "2025-08-29T12:00:00.000Z"
+    }
+  ]
+}
