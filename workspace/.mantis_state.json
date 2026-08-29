@@ -1,12 +1,18 @@
 {
-  "pass_number": 1,
+  "pass_number": 2,
   "active_snapshot": {
     "root": "/home/joaomarcos/teste-do-mantis",
     "snapshot_id": "snap_20250829_01",
     "snapshot_pinned": false
   },
-  "snapshot_history": [],
-  "kb_snapshot_id": "",
+  "snapshot_history": [
+    {
+      "pass_number": 1,
+      "snapshot_id": "snap_20250829_01",
+      "timestamp": "2025-08-29T11:56:22-03:00"
+    }
+  ],
+  "kb_snapshot_id": "snap_20250829_01",
   "changed_files": [],
   "changed_files_status": "UNKNOWN",
   "changed_files_pass": 0
