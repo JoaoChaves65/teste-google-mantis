@@ -7,7 +7,7 @@
   "privileges_required": "LOW",
   "attacker_position": "EXTERNAL",
   "user_interaction": "NONE",
-  "status": "PROVISIONALLY_VALID",
+  "status": "VALID",
   "code_paths": ["packages/api-vulnerable/src/api/v1/customers.routes.ts:109-141"],
   "discovery_commit": "snap_20250829_01",
   "cwe": "CWE-915",
@@ -21,6 +21,58 @@
       "details": "Initial audit finding recorded for mass assignment of role in customer creation",
       "pass_number": 2,
       "timestamp": "2025-08-29T12:00:00.000Z"
+    },
+    {
+      "stage": "reviewer",
+      "action": "reviewed",
+      "details": "Determined status as VALID because Confirmed mass assignment in POST /api/v1/customers at customers.routes.ts lines 24-25 (schema) and 114-137 (handler): accepts 'role' field without authorization check. CUSTOMER/BARBER can set role to ADMIN when creating customer.",
+      "pass_number": 2,
+      "snapshot": "snap_20250829_01",
+      "timestamp": "2026-08-29T18:35:08.169719Z"
     }
-  ]
+  ],
+  "reasoning": "Confirmed mass assignment in POST /api/v1/customers at customers.routes.ts lines 24-25 (schema) and 114-137 (handler): accepts 'role' field without authorization check. CUSTOMER/BARBER can set role to ADMIN when creating customer.",
+  "repro_hints": "Login as CUSTOMER, POST /api/v1/customers with {name: 'Test', phone: '11999999999', email: 'test@test.com', role: 'ADMIN'}. Expected: 201 with customer created with ADMIN role.",
+  "triage_checklist": {
+    "ignore_hypothetical_misuse": {
+      "outcome": "PASS"
+    },
+    "ignore_missing_hygiene": {
+      "outcome": "PASS"
+    },
+    "require_strict_reproducibility": {
+      "outcome": "PASS"
+    },
+    "avoid_pedantic_linting": {
+      "outcome": "PASS"
+    },
+    "no_security_flaw_stretching": {
+      "outcome": "PASS"
+    },
+    "evaluate_questionable_file_paths": {
+      "outcome": "PASS"
+    },
+    "ignore_resource_exhaustion_dos": {
+      "outcome": "PASS"
+    },
+    "intrinsic_security_flaws": {
+      "outcome": "PASS"
+    },
+    "verify_mitigations_pragmatically": {
+      "outcome": "PASS"
+    },
+    "refine_code_paths_strictly": {
+      "outcome": "PASS"
+    },
+    "ignore_simd_vector_padding": {
+      "outcome": "NOT_APPLICABLE",
+      "reason": "Not SIMD/vector code"
+    },
+    "ensure_source_code_coherence": {
+      "outcome": "PASS"
+    },
+    "verify_attacker_control_of_source": {
+      "outcome": "PASS"
+    }
+  }
 }
