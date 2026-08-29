@@ -1,7 +1,6 @@
 # Security Summary: packages/web/src/pages/customers
 
-**Path**: `packages/web/src/pages/customers`
-**Files**: 2 source files
+**Path**: `packages/web/src/pages/customers` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

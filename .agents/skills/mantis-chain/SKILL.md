@@ -1,9 +1,10 @@
 ---
 name: mantis-chain
 description: >-
-  Analyzes individual security findings to identify and construct complex exploit chains.
-  Use after validation stages to see if multiple low-severity bugs can be combined into a higher impact vulnerability.
-  Don't use for initial codebase auditing or writing patch code.
+  Analyzes individual security findings to identify and construct complex
+  exploit chains. Use after validation stages to see if multiple low-severity
+  bugs can be combined into a higher impact vulnerability. Don't use for initial
+  codebase auditing or writing patch code.
 ---
 
 # Vulnerability Chainer (/mantis-chain)
@@ -218,8 +219,8 @@ Execute the chaining stage as follows:
 2. **Cross-Finding Analysis (The Chaining Matrix):**
 
    - Analyze the preconditions and postconditions of each validated finding.
-   - Ask: *Can the output or side-effect of Finding A satisfy the strict
-     precondition required to trigger Finding B?*
+   - Ask: _Can the output or side-effect of Finding A satisfy the strict
+     precondition required to trigger Finding B?_
    - Example Chains to look for:
      - **Path Traversal + Loose Permissions = RCE:** A low-severity path
        traversal (Finding A) allows writing to `/tmp`, but a separate
@@ -326,7 +327,7 @@ Execute the chaining stage as follows:
        file path.)
    - **Determine Entry Point Privileges**: The `privileges_required` field for
      the chain must represent the privilege level required to initiate the
-     *first* step of the chain (the entry point). For example, if the chain
+     _first_ step of the chain (the entry point). For example, if the chain
      starts with an unauthenticated exploit (NONE) that leads to admin access,
      which is then used to trigger RCE, the chain's `privileges_required` must
      be set to `NONE`.

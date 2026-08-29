@@ -1,7 +1,6 @@
 # Security Summary: packages/api-secure/src/health
 
-**Path**: `packages/api-secure/src/health`
-**Files**: 3 source files
+**Path**: `packages/api-secure/src/health` **Files**: 3 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

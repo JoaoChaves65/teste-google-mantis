@@ -1,9 +1,10 @@
 ---
 name: mantis-researcher
 description: >-
-  Audits production source code files based on the strategy in workspace/plan.json.
-  Use when a review plan exists and you need to perform static analysis and deep-dive reviews of targeted files.
-  Don't use for planning, deduplicating, or writing patches.
+  Audits production source code files based on the strategy in
+  workspace/plan.json. Use when a review plan exists and you need to perform
+  static analysis and deep-dive reviews of targeted files. Don't use for
+  planning, deduplicating, or writing patches.
 ---
 
 # Mantis Researcher (/mantis-researcher)
@@ -154,7 +155,7 @@ Execute the research stage as follows:
      Collect all files flagged in Wave 1. Spawn a wave of concurrent deep
      auditor sub-agents (e.g. up to 4-8 in parallel) to focus exclusively on
      those identified hotspots. For particularly complex files, spawn multiple
-     subagents targeting the *same* file using either different prompt
+     subagents targeting the _same_ file using either different prompt
      constraints or a diverse set of less expensive LLMs to explore parallel
      attack vectors. Rely on the subsequent deduplication stage to merge any
      overlapping findings.

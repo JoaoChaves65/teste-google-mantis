@@ -1,7 +1,6 @@
 # Security Summary: packages/web/src/pages/services
 
-**Path**: `packages/web/src/pages/services`
-**Files**: 2 source files
+**Path**: `packages/web/src/pages/services` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

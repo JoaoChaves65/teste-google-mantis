@@ -166,4 +166,5 @@ This project follows standard practices:
 ## License
 
 Educational use only. Not for production deployment.
+
 # teste-google-mantis

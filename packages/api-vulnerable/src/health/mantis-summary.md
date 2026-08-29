@@ -1,7 +1,6 @@
 # Security Summary: packages/api-vulnerable/src/health
 
-**Path**: `packages/api-vulnerable/src/health`
-**Files**: 3 source files
+**Path**: `packages/api-vulnerable/src/health` **Files**: 3 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

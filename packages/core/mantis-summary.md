@@ -1,8 +1,6 @@
 # Security Summary: packages/core
 
-**Path**: `packages/core`
-**Files**: 4 source files
-**Subdirectories**: 1
+**Path**: `packages/core` **Files**: 4 source files **Subdirectories**: 1
 
 ## Sensitive Operations
 
@@ -13,9 +11,7 @@
 
 **src/**: # Security Summary: packages/core/src
 
-**Path**: `packages/core/src`
-**Files**: 6 source files
-**Subdirectories**: 6
+**Path**: `packages/core/src` **Files**: 6 source files **Subdirectories**: 6
 
 ## Sensitive Operations
 

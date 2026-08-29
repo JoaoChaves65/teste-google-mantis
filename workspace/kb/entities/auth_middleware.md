@@ -1,13 +1,18 @@
 <!-- KB_SNAPSHOT: snap_20250829_01 -->
+
 # Secure Auth Middleware
 
 ## Overview
-Authentication middleware for the secure API variant. Validates JWT, checks token revocation, and verifies account status.
+
+Authentication middleware for the secure API variant. Validates JWT, checks
+token revocation, and verifies account status.
 
 ## Location
+
 `packages/api-secure/src/http/middleware/auth.ts`
 
 ## Implementation
+
 ```typescript
 export const authMiddleware = (
   req: AuthenticatedRequest,
@@ -54,19 +59,20 @@ export const authMiddleware = (
 
 ## Security Controls
 
-| Control | Implementation |
-|---------|----------------|
-| JWT Validation | `verifyAccessToken()` with signature + expiry check |
+| Control          | Implementation                                                               |
+| ---------------- | ---------------------------------------------------------------------------- |
+| JWT Validation   | `verifyAccessToken()` with signature + expiry check                          |
 | Token Revocation | Checked in `LoginCommand`/`RefreshTokenCommand` via `RefreshTokenRepository` |
-| Account Status | Checked during login/refresh via `UserStatus.ACTIVE` check |
-| Token Type | Enforces `type === 'access'` |
-| Expiry Handling | Returns 401 with `TokenExpiredError` code |
-| Refresh Rotation | Generates new pair, revokes old refresh token |
-| Cookie Security | `HttpOnly`, `Secure` (prod), `SameSite=Lax` (dev) / `Strict` (prod) |
+| Account Status   | Checked during login/refresh via `UserStatus.ACTIVE` check                   |
+| Token Type       | Enforces `type === 'access'`                                                 |
+| Expiry Handling  | Returns 401 with `TokenExpiredError` code                                    |
+| Refresh Rotation | Generates new pair, revokes old refresh token                                |
+| Cookie Security  | `HttpOnly`, `Secure` (prod), `SameSite=Lax` (dev) / `Strict` (prod)          |
 
 ## Associated Vulnerabilities
+
 - [CWE-306: Missing Authentication for Critical Function](../vulnerabilities/CWE-306.md)
 
 ---
 
-*Last updated: Pass 1 — KB_SNAPSHOT: snap_20250829_01*
+_Last updated: Pass 1 — KB_SNAPSHOT: snap_20250829_01_

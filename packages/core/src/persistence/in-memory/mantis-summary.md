@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/persistence/in-memory
 
-**Path**: `packages/core/src/persistence/in-memory`
-**Files**: 9 source files
+**Path**: `packages/core/src/persistence/in-memory` **Files**: 9 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

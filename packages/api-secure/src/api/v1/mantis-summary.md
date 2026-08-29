@@ -1,7 +1,6 @@
 # Security Summary: packages/api-secure/src/api/v1
 
-**Path**: `packages/api-secure/src/api/v1`
-**Files**: 8 source files
+**Path**: `packages/api-secure/src/api/v1` **Files**: 8 source files
 **Subdirectories**: 0
 
 ## API Endpoints & Exports

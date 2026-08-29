@@ -1,8 +1,6 @@
 # Security Summary: workspace
 
-**Path**: `workspace`
-**Files**: 2 source files
-**Subdirectories**: 0
+**Path**: `workspace` **Files**: 2 source files **Subdirectories**: 0
 
 ## API Endpoints & Exports
 

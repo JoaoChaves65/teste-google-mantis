@@ -1,8 +1,6 @@
 # Security Summary: infra/docker
 
-**Path**: `infra/docker`
-**Files**: 5 source files
-**Subdirectories**: 0
+**Path**: `infra/docker` **Files**: 5 source files **Subdirectories**: 0
 
 ## Files in This Directory
 

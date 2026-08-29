@@ -1,7 +1,6 @@
 # Security Summary: packages/web/src/components/layout
 
-**Path**: `packages/web/src/components/layout`
-**Files**: 3 source files
+**Path**: `packages/web/src/components/layout` **Files**: 3 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

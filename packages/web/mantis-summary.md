@@ -1,8 +1,6 @@
 # Security Summary: packages/web
 
-**Path**: `packages/web`
-**Files**: 8 source files
-**Subdirectories**: 5
+**Path**: `packages/web` **Files**: 8 source files **Subdirectories**: 5
 
 ## Trust Boundaries & External Inputs
 
@@ -12,19 +10,15 @@
 
 **test-results/**: # Security Summary: packages/web/test-results
 
-**Path**: `packages/web/test-results`
-**Files**: 2 source files
+**Path**: `packages/web/test-results` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
 - `.last-run.json`
-- `mantis-summary.m...
-**src/**: # Security Summary: packages/web/src
+- `mantis-summary.m... **src/**: # Security Summary: packages/web/src
 
-**Path**: `packages/web/src`
-**Files**: 6 source files
-**Subdirectories**: 7
+**Path**: `packages/web/src` **Files**: 6 source files **Subdirectories**: 7
 
 ## Trust Boundaries & External Inputs
 
@@ -32,33 +26,25 @@
 
 ## Sensitive Operations
 
-- ...
-**public/**: # Security Summary: packages/web/public
+- ... **public/**: # Security Summary: packages/web/public
 
-**Path**: `packages/web/public`
-**Files**: 1 source files
-**Subdirectories**: 0
+**Path**: `packages/web/public` **Files**: 1 source files **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summary.md`
-...
-**playwright-report/**: # Security Summary: packages/web/playwright-report
+- `mantis-summary.md` ... **playwright-report/**: # Security Summary:
+  packages/web/playwright-report
 
-**Path**: `packages/web/playwright-report`
-**Files**: 2 source files
+**Path**: `packages/web/playwright-report` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs
 
 - `index.html`
 
-#...
-**e2e/**: # Security Summary: packages/web/e2e
+#... **e2e/**: # Security Summary: packages/web/e2e
 
-**Path**: `packages/web/e2e`
-**Files**: 15 source files
-**Subdirectories**: 0
+**Path**: `packages/web/e2e` **Files**: 15 source files **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs
 

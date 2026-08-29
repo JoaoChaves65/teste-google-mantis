@@ -1,9 +1,10 @@
 ---
 name: mantis-calibrate
 description: >-
-  Calculates the final risk score based on empirical evidence and architectural impact.
-  Use when findings have been fully processed by previous stages and you need to append final risk scores to the finding files.
-  Don't use for discovering new vulnerabilities or writing patches.
+  Calculates the final risk score based on empirical evidence and architectural
+  impact. Use when findings have been fully processed by previous stages and you
+  need to append final risk scores to the finding files. Don't use for
+  discovering new vulnerabilities or writing patches.
 ---
 
 # Risk Calibrator (/mantis-calibrate)
@@ -223,8 +224,8 @@ declares otherwise.
      - 3: Moderate loss (e.g., partial data exposure, temporary or partial
        system disruption).
      - 2: Minor loss (e.g., minor information leak, localized disruption). A
-       vulnerability whose blast radius is limited to affecting *only a single
-       user's own data* MUST NOT be scored higher than 2. *Exception:* If the
+       vulnerability whose blast radius is limited to affecting _only a single
+       user's own data_ MUST NOT be scored higher than 2. _Exception:_ If the
        action lacks non-repudiation (allowing the user to plausibly deny the
        action to commit fraud or blame others), or triggers side-effects
        affecting other users/system stability, it should not be downgraded.
@@ -239,7 +240,7 @@ declares otherwise.
        attacker control), elevate the Impact score to at least **4** (or **5**
        if it leads to systemic compromise), even if the immediate technical
        impact seems localized.
-     - *Note on Privileges Required & Lateral Movement:*
+     - _Note on Privileges Required & Lateral Movement:_
        - If the finding requires **HIGH** privileges (e.g., administrative
          privileges, admin-to-super-admin escalation) or only allows lateral
          movement/pivoting between internal components from an already
@@ -251,10 +252,10 @@ declares otherwise.
          it leads to systemic compromise of other tenants/users, OR it directly
          bypasses a core security control/library purpose, in which case it can
          be higher).
-       - These caps apply to *individual* findings. If successfully chained into
+       - These caps apply to _individual_ findings. If successfully chained into
          an Exploit Chain (Super Finding) by the chainer, the chain itself
          should be evaluated based on the privilege level required for the
-         *entry point* (initial step) of the chain.
+         _entry point_ (initial step) of the chain.
    - **Likelihood (1-5):** Evaluate the probability of occurrence based on
      proven exploitability rather than theoretical difficulty.
      - 5: Actively exploited in the wild, OR the agent successfully generated a
@@ -460,9 +461,9 @@ declares otherwise.
    **Final Score (Hazard) = (Impact + Likelihood) * Multiplier** (Capped at
    10.0).
 
-   *Note on Outrage:* In your reasoning, comment on the broader equation **Risk
+   _Note on Outrage:_ In your reasoning, comment on the broader equation **Risk
    = Hazard + Outrage**, where the "outrage risk" (e.g., reputational damage,
-   user sentiment fallout) is taken into account. Do *not* include the outrage
+   user sentiment fallout) is taken into account. Do _not_ include the outrage
    factor in the final numerical score.
 
 3. **Critical Sanity Triage (Downgrading & Capping Findings):** Before
@@ -470,7 +471,7 @@ declares otherwise.
    quality of the finding, its context, and accumulated evidence.
 
    **Core Principle - Marginal Capability:** The final severity and priority of
-   a finding are strictly bounded by the *marginal capability* gained by the
+   a finding are strictly bounded by the _marginal capability_ gained by the
    attacker over their prerequisite position. If the exploit does not grant the
    attacker significant new control, access, or capabilities beyond what is
    already inherent to their starting position (or already possessed via

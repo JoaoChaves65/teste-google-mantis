@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/application/auth
 
-**Path**: `packages/core/src/application/auth`
-**Files**: 9 source files
+**Path**: `packages/core/src/application/auth` **Files**: 9 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

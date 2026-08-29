@@ -1,7 +1,6 @@
 # Security Summary: packages/web/src/lib/api
 
-**Path**: `packages/web/src/lib/api`
-**Files**: 2 source files
+**Path**: `packages/web/src/lib/api` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

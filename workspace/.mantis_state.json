@@ -1,1 +1,13 @@
-{"pass_number": 1, "active_snapshot": {"root": "/home/joaomarcos/teste-do-mantis", "snapshot_id": "snap_20250829_01", "snapshot_pinned": false}, "snapshot_history": [], "kb_snapshot_id": "", "changed_files": [], "changed_files_status": "UNKNOWN", "changed_files_pass": 0}
+{
+  "pass_number": 1,
+  "active_snapshot": {
+    "root": "/home/joaomarcos/teste-do-mantis",
+    "snapshot_id": "snap_20250829_01",
+    "snapshot_pinned": false
+  },
+  "snapshot_history": [],
+  "kb_snapshot_id": "",
+  "changed_files": [],
+  "changed_files_status": "UNKNOWN",
+  "changed_files_pass": 0
+}

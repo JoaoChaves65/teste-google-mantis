@@ -1,8 +1,6 @@
 # Security Summary: infra/db/init
 
-**Path**: `infra/db/init`
-**Files**: 2 source files
-**Subdirectories**: 0
+**Path**: `infra/db/init` **Files**: 2 source files **Subdirectories**: 0
 
 ## Sensitive Operations
 

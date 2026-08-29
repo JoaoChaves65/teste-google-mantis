@@ -1,8 +1,6 @@
 # Security Summary: docs
 
-**Path**: `docs`
-**Files**: 5 source files
-**Subdirectories**: 1
+**Path**: `docs` **Files**: 5 source files **Subdirectories**: 1
 
 ## Trust Boundaries & External Inputs
 
@@ -22,9 +20,7 @@
 
 **security-lab/**: # Security Summary: docs/security-lab
 
-**Path**: `docs/security-lab`
-**Files**: 3 source files
-**Subdirectories**: 0
+**Path**: `docs/security-lab` **Files**: 3 source files **Subdirectories**: 0
 
 ## Sensitive Operations
 

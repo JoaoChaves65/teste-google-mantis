@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/application/barbers
 
-**Path**: `packages/core/src/application/barbers`
-**Files**: 6 source files
+**Path**: `packages/core/src/application/barbers` **Files**: 6 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

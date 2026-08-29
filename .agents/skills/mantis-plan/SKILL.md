@@ -1,9 +1,11 @@
 ---
 name: mantis-plan
 description: >-
-  Formulates a targeted defensive security reviewing plan based on the active threat model and historical learnings.
-  Use when starting a security review campaign to map the codebase boundaries and generate a roadmap (workspace/plan.json).
-  Don't use for executing code reviews, writing test scripts, or patching code.
+  Formulates a targeted defensive security reviewing plan based on the active
+  threat model and historical learnings. Use when starting a security review
+  campaign to map the codebase boundaries and generate a roadmap
+  (workspace/plan.json). Don't use for executing code reviews, writing test
+  scripts, or patching code.
 ---
 
 # Strategist (/mantis-plan)
@@ -521,7 +523,10 @@ Execute the planning stage as follows:
     {
       "title": "Exhaustive Review: [relative_file_path]",
       "target_files": ["[relative_file_path_1]", "[relative_file_path_2]"],
-      "kb_references": ["workspace/kb/entities/auth_module.md", "workspace/kb/vulnerabilities/CWE-79.md"],
+      "kb_references": [
+        "workspace/kb/entities/auth_module.md",
+        "workspace/kb/vulnerabilities/CWE-79.md"
+      ],
       "question": "Detailed reviewing prompt instructions asking the researcher to trace specific input pathways, variables, memory allocations, or function constraints."
     }
   ]

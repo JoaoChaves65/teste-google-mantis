@@ -1,9 +1,11 @@
 ---
 name: mantis-advise
 description: >-
-  Proactive security advisor and guardrail assistant for secure code development.
-  Use to query threat models, historical vulnerability lineages, verified patch patterns, triaged false positives, and learned trajectory invariants before and during code edits to prevent repeat mistakes.
-  Don't use for automated multi-pass red-team exploitation or fuzzing.
+  Proactive security advisor and guardrail assistant for secure code
+  development. Use to query threat models, historical vulnerability lineages,
+  verified patch patterns, triaged false positives, and learned trajectory
+  invariants before and during code edits to prevent repeat mistakes. Don't use
+  for automated multi-pass red-team exploitation or fuzzing.
 ---
 
 # Security Advisor (/mantis-advise)
@@ -55,7 +57,7 @@ Coding agents with standard bash access should run
    python3 reference/scripts/advise.py --file src/auth.py
    ```
 
-   *Prints*: Actionable security advisory markdown with active threat model,
+   _Prints_: Actionable security advisory markdown with active threat model,
    historical vulnerabilities, verified patch diffs, triaged false positives,
    and invariants.
 
@@ -154,14 +156,18 @@ The Advisor outputs clean, actionable recommendations:
 # Security Advisory: <target_file>
 
 ### 1. Threat Model & Trust Boundaries
+
 - **Entry Points**: <untrusted network / RPC / CLI>
 - **Sensitive Assets**: <credentials, filesystem, tenant data>
 
 ### 2. Known Pitfalls & Historical Lineages
-- **[CWE-XX] <Title>** (Lineage: `<uuid>`): <How it occurred and how it was resolved>
+
+- **[CWE-XX] <Title>** (Lineage: `<uuid>`):
+  <How it occurred and how it was resolved>
 - **Verified Safe Pattern**:
   ```python
   # Safe implementation idiom
+  ```
 ````
 
 ### 3. False Positive Context (Intentional Behavior)
@@ -176,4 +182,5 @@ The Advisor outputs clean, actionable recommendations:
 - [ ] Respects trust boundary isolation.
 
 ```
+
 ```

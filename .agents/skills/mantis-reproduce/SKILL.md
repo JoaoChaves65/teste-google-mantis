@@ -1,9 +1,9 @@
 ---
 name: mantis-reproduce
 description: >-
-  Generates and runs crash reproducers to verify security flaws.
-  Use when viable findings exist and you need to write and execute a script or payload to verify the crash.
-  Don't use for code auditing or patching.
+  Generates and runs crash reproducers to verify security flaws. Use when viable
+  findings exist and you need to write and execute a script or payload to verify
+  the crash. Don't use for code auditing or patching.
 ---
 
 # Reproducer (/mantis-reproduce)
@@ -297,7 +297,7 @@ Execute the reproduction stage under these constraints:
    standard execution. Use your best judgment to construct a working harness for
    the artifact.
 
-   - *Parallel Trajectory Search vs. Tiered Iterative Reproduction:*
+   - _Parallel Trajectory Search vs. Tiered Iterative Reproduction:_
 
      - **Parallel Trajectory Search (Breadth-First):** When subagents are
        available, deploy concurrent workers taking diverse logical approaches to
@@ -310,7 +310,7 @@ Execute the reproduction stage under these constraints:
        (Tier 1 -> Tier 2 -> Tier 3) to refine its trigger payload incrementally
        rather than attempting a single-shot end-to-end launch.
 
-   - *Tiered Iterative Execution Ladder:*
+   - _Tiered Iterative Execution Ladder:_
 
      - **Tier 1 (Micro-Harness / Sink Logic Validation):** Construct a
        lightweight test calling the vulnerable function/module directly to
@@ -336,7 +336,7 @@ Execute the reproduction stage under these constraints:
        `repro_status = "failed_to_reproduce"` with details citing
        `"Internal Invariant Protection"`.
 
-   - *Attempt Cap Accounting & Local Retries:*
+   - _Attempt Cap Accounting & Local Retries:_
 
      - **Sub-Tier-3 Stepping-Stone Sub-Budget:** Internal Tier-1 and Tier-2
        trial runs are bounded local execution steps (max 3 trial executions per
@@ -575,8 +575,8 @@ and apply INV-1 (downgrade `VERIFIED_SECURE` → `VERIFICATION_FAILED`).
        V: if V is a bare integer, treat count=V and last_snapshot=UNKNOWN; if V
        is an object, use V.count / V.last_snapshot (default UNKNOWN). Before
        incrementing, run Block B comparing the finding's snapshot to the current
-       SNAPSHOT_ID: reset `count=0` ONLY when Block B is NOT_MATCHED *because
-       the two snapshots are present and actually differ* (a genuine code change
+       SNAPSHOT_ID: reset `count=0` ONLY when Block B is NOT_MATCHED _because
+       the two snapshots are present and actually differ_ (a genuine code change
        earns a fresh budget). Do NOT reset on UNKNOWN (absent/`pass_`/unpinned)
        — that would make no-VCS targets retry forever. Additionally keep an
        absolute per-finding-id attempt counter that is NEVER reset, and stop
@@ -721,7 +721,6 @@ and apply INV-1 (downgrade `VERIFIED_SECURE` → `VERIFICATION_FAILED`).
        3. If the unpatched baseline DOES trigger: proceed with the attack
           (`bypassed_patch` or `failed_to_bypass`). Apply INV-1 (downgrade
           `VERIFIED_SECURE` -> `VERIFICATION_FAILED` if `bypassed_patch`).
-
        - **Sanitizer consistency:** the baseline re-run, attack, and re-attack
          MUST use the same sanitizer flags that made the original baseline
          trigger. If the baseline triggered via UBSan (exit 0), recompiling the

@@ -1,8 +1,7 @@
 # Security Summary: packages/core/src/infrastructure/database/migrations
 
-**Path**: `packages/core/src/infrastructure/database/migrations`
-**Files**: 8 source files
-**Subdirectories**: 0
+**Path**: `packages/core/src/infrastructure/database/migrations` **Files**: 8
+source files **Subdirectories**: 0
 
 ## Sensitive Operations
 

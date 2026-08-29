@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/shared
 
-**Path**: `packages/core/src/shared`
-**Files**: 11 source files
+**Path**: `packages/core/src/shared` **Files**: 11 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

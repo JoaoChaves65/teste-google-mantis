@@ -1,8 +1,7 @@
 # Security Summary: packages/api-vulnerable/src/security-lab/secure-contrast
 
-**Path**: `packages/api-vulnerable/src/security-lab/secure-contrast`
-**Files**: 7 source files
-**Subdirectories**: 0
+**Path**: `packages/api-vulnerable/src/security-lab/secure-contrast` **Files**:
+7 source files **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs
 

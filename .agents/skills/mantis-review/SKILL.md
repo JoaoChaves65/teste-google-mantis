@@ -1,9 +1,9 @@
 ---
 name: mantis-review
 description: >-
-  Independently reviews findings and filters out false positives.
-  Use when consolidated findings need validation against the actual source code.
-  Don't use for reproducing crashes or patching code.
+  Independently reviews findings and filters out false positives. Use when
+  consolidated findings need validation against the actual source code. Don't
+  use for reproducing crashes or patching code.
 ---
 
 # Reviewer (/mantis-review)
@@ -192,19 +192,58 @@ Drift `triage_checklist` (paste verbatim; all 13 keys, all `UNKNOWN`):
 
 ```json
 {
-  "ignore_hypothetical_misuse":        { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "ignore_missing_hygiene":            { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "require_strict_reproducibility":    { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "avoid_pedantic_linting":            { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "no_security_flaw_stretching":       { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "evaluate_questionable_file_paths":  { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "ignore_resource_exhaustion_dos":    { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "intrinsic_security_flaws":          { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "verify_mitigations_pragmatically":  { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "refine_code_paths_strictly":        { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "ignore_simd_vector_padding":        { "outcome": "UNKNOWN", "reason": "snapshot drift: not re-validated against the current pinned snapshot" },
-  "ensure_source_code_coherence":      { "outcome": "UNKNOWN", "reason": "snapshot drift: line/path mismatch may be caused by drift, not hallucination; not re-validated" },
-  "verify_attacker_control_of_source": { "outcome": "UNKNOWN", "reason": "snapshot drift: trust-boundary path not re-traced against the current pinned snapshot" }
+  "ignore_hypothetical_misuse": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "ignore_missing_hygiene": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "require_strict_reproducibility": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "avoid_pedantic_linting": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "no_security_flaw_stretching": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "evaluate_questionable_file_paths": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "ignore_resource_exhaustion_dos": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "intrinsic_security_flaws": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "verify_mitigations_pragmatically": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "refine_code_paths_strictly": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "ignore_simd_vector_padding": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: not re-validated against the current pinned snapshot"
+  },
+  "ensure_source_code_coherence": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: line/path mismatch may be caused by drift, not hallucination; not re-validated"
+  },
+  "verify_attacker_control_of_source": {
+    "outcome": "UNKNOWN",
+    "reason": "snapshot drift: trust-boundary path not re-traced against the current pinned snapshot"
+  }
 }
 ```
 
@@ -229,48 +268,48 @@ findings (SNAPSHOT MODE OFF) flow into steps 2-5 below.
    each finding against these strict criteria. Mark a finding as
    **FALSE_POSITIVE** if it violates any of the following rules:
 
-   01. **Ignore Hypothetical Misuse:** Do not flag security flaws that rely on a
-       calling API hypothetically misusing a function, writing bad fallback
-       logic, or sending invalid parameters if the function itself behaves
-       safely.
-   02. **Ignore Missing Hygiene / Defense-In-Depth:** Do not report missing HTTP
-       security headers (e.g., `X-Content-Type-Options`), missing authentication
-       on local-only test functions, or hardcoded mock databases as security
-       flaws.
-   03. **Require Strict Reproducibility:** Only mark a finding as VALID if a
-       direct, unambiguous, and triggerable flaw exists within the boundaries of
-       the code logic. If the finding is extremely fragile (e.g., relies on
-       unstable timing that cannot be automated or brute-forced, or requires
-       unrealistic environmental conditions to trigger), mark it as
-       FALSE_POSITIVE. *Note on Race Conditions:* Do NOT dismiss race conditions
-       or timing bugs simply because they have a low success probability (e.g.,
-       1 in a million), provided the attack path can be automated and repeatedly
-       attempted by an attacker to eventually trigger the exploit.
-   04. **Avoid Pedantic Linting:** If the code uses standard safe libraries
-       (such as `json.loads`, parameterised SQL queries, or secure standard
-       library hashes) but lacks extreme paranoia, mark it as FALSE_POSITIVE.
-   05. **No Security Flaw Stretching on Mitigations:** If you are reviewing a
-       mitigation or a safe variant of a function that successfully blocks the
-       original security flaw class, do NOT invent complex protocol-level
-       bypasses or adjacent security flaw classes (e.g., SSRF when reviewing
-       Command Injection fixes). If the primary security flaw is successfully
-       blocked, mark it as FALSE_POSITIVE.
-   06. **Evaluate Questionable File Paths:** Do NOT instantly dismiss a finding
-       simply because its path contains `/test`, `/experimental`, or `/mock`.
-       Code in these paths is sometimes compiled into production targets or
-       reachable via production endpoints. Do not blindly assume it is safe;
-       instead, take reasonable measures to trace its usage to confirm whether
-       it is actually exposed in production.
-   07. **Ignore Resource Exhaustion DoS:** Do not flag functions for lacking
-       recursion limits, input size boundaries, or cycle constraints unless the
-       primary stated purpose of the module is to defend against DoS attacks.
-   08. **Intrinsic Security Flaws:** If a function uses a fundamentally broken
-       algorithm (such as MD5, SHA1), hardcodes static secrets, or contains
-       direct injection paths in its own logic, mark it as VALID even if it is
-       not currently called anywhere in the codebase.
-   09. **Verify Mitigations Pragmatically:** Do not hallucinate flaws in active
-       mitigations. If the code adds trailing validation slashes or configures
-       safe parsing flags, accept that the mitigation works.
+   1. **Ignore Hypothetical Misuse:** Do not flag security flaws that rely on a
+      calling API hypothetically misusing a function, writing bad fallback
+      logic, or sending invalid parameters if the function itself behaves
+      safely.
+   2. **Ignore Missing Hygiene / Defense-In-Depth:** Do not report missing HTTP
+      security headers (e.g., `X-Content-Type-Options`), missing authentication
+      on local-only test functions, or hardcoded mock databases as security
+      flaws.
+   3. **Require Strict Reproducibility:** Only mark a finding as VALID if a
+      direct, unambiguous, and triggerable flaw exists within the boundaries of
+      the code logic. If the finding is extremely fragile (e.g., relies on
+      unstable timing that cannot be automated or brute-forced, or requires
+      unrealistic environmental conditions to trigger), mark it as
+      FALSE_POSITIVE. _Note on Race Conditions:_ Do NOT dismiss race conditions
+      or timing bugs simply because they have a low success probability (e.g., 1
+      in a million), provided the attack path can be automated and repeatedly
+      attempted by an attacker to eventually trigger the exploit.
+   4. **Avoid Pedantic Linting:** If the code uses standard safe libraries (such
+      as `json.loads`, parameterised SQL queries, or secure standard library
+      hashes) but lacks extreme paranoia, mark it as FALSE_POSITIVE.
+   5. **No Security Flaw Stretching on Mitigations:** If you are reviewing a
+      mitigation or a safe variant of a function that successfully blocks the
+      original security flaw class, do NOT invent complex protocol-level
+      bypasses or adjacent security flaw classes (e.g., SSRF when reviewing
+      Command Injection fixes). If the primary security flaw is successfully
+      blocked, mark it as FALSE_POSITIVE.
+   6. **Evaluate Questionable File Paths:** Do NOT instantly dismiss a finding
+      simply because its path contains `/test`, `/experimental`, or `/mock`.
+      Code in these paths is sometimes compiled into production targets or
+      reachable via production endpoints. Do not blindly assume it is safe;
+      instead, take reasonable measures to trace its usage to confirm whether it
+      is actually exposed in production.
+   7. **Ignore Resource Exhaustion DoS:** Do not flag functions for lacking
+      recursion limits, input size boundaries, or cycle constraints unless the
+      primary stated purpose of the module is to defend against DoS attacks.
+   8. **Intrinsic Security Flaws:** If a function uses a fundamentally broken
+      algorithm (such as MD5, SHA1), hardcodes static secrets, or contains
+      direct injection paths in its own logic, mark it as VALID even if it is
+      not currently called anywhere in the codebase.
+   9. **Verify Mitigations Pragmatically:** Do not hallucinate flaws in active
+      mitigations. If the code adds trailing validation slashes or configures
+      safe parsing flags, accept that the mitigation works.
    10. **Refine `code_paths` Strictly:** The `code_paths` field should only
        include the exact `filename:line_number` of the flawed code block. Strip
        out any helper files, test harnesses, or correct caller files from
@@ -304,7 +343,6 @@ findings (SNAPSHOT MODE OFF) flow into steps 2-5 below.
        - Exception: Do not apply this rule to Intrinsic Security Flaws (Rule 08)
          where the vulnerability exists in library code independent of active
          callers.
-
    - **Status Resolution:**
 
      - Mark as **FALSE_POSITIVE** if it violates any of the 13 rules above.
@@ -396,7 +434,10 @@ findings (SNAPSHOT MODE OFF) flow into steps 2-5 below.
      {
        "ignore_hypothetical_misuse": { "outcome": "PASS" },
        "ignore_missing_hygiene": { "outcome": "PASS" },
-       "require_strict_reproducibility": { "outcome": "FAIL", "reason": "Requires unstable 1-in-a-million race condition that cannot be automated." },
+       "require_strict_reproducibility": {
+         "outcome": "FAIL",
+         "reason": "Requires unstable 1-in-a-million race condition that cannot be automated."
+       },
        "avoid_pedantic_linting": { "outcome": "PASS" },
        "no_security_flaw_stretching": { "outcome": "PASS" },
        "evaluate_questionable_file_paths": { "outcome": "PASS" },

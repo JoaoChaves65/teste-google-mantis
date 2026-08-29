@@ -1,7 +1,6 @@
 # Security Summary: packages/api-secure/src/auth
 
-**Path**: `packages/api-secure/src/auth`
-**Files**: 3 source files
+**Path**: `packages/api-secure/src/auth` **Files**: 3 source files
 **Subdirectories**: 0
 
 ## API Endpoints & Exports

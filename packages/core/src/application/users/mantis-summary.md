@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/application/users
 
-**Path**: `packages/core/src/application/users`
-**Files**: 4 source files
+**Path**: `packages/core/src/application/users` **Files**: 4 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

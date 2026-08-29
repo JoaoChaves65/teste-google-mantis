@@ -1,8 +1,6 @@
 # Security Summary: packages/web/public
 
-**Path**: `packages/web/public`
-**Files**: 1 source files
-**Subdirectories**: 0
+**Path**: `packages/web/public` **Files**: 1 source files **Subdirectories**: 0
 
 ## Files in This Directory
 

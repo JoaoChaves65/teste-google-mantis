@@ -1,8 +1,6 @@
 # Security Summary: scripts
 
-**Path**: `scripts`
-**Files**: 2 source files
-**Subdirectories**: 0
+**Path**: `scripts` **Files**: 2 source files **Subdirectories**: 0
 
 ## Sensitive Operations
 

@@ -1,7 +1,6 @@
 # Security Summary: packages/web/src/pages/dashboard
 
-**Path**: `packages/web/src/pages/dashboard`
-**Files**: 2 source files
+**Path**: `packages/web/src/pages/dashboard` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Sensitive Operations

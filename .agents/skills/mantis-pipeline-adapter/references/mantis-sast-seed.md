@@ -243,19 +243,43 @@ SAST tool's output can be converted to this IR by a thin wrapper.
 **Provenance header (line 1):**
 
 ```json
-{"_provenance": true, "scan_snapshot_id": "abc123", "tool": "codeql", "tool_version": "2.15.0", "scan_timestamp": "2026-07-22T12:00:00Z"}
+{
+  "_provenance": true,
+  "scan_snapshot_id": "abc123",
+  "tool": "codeql",
+  "tool_version": "2.15.0",
+  "scan_timestamp": "2026-07-22T12:00:00Z"
+}
 ```
 
 **Finding line (line 2+):**
 
 ```json
-{"rule_id": "cpp/sql-injection", "rule_name": "SQL injection via string concatenation", "cwe": "CWE-89", "severity": "HIGH", "code_paths": ["src/db.c:42"], "message": "User-controlled input concatenated into SQL query"}
+{
+  "rule_id": "cpp/sql-injection",
+  "rule_name": "SQL injection via string concatenation",
+  "cwe": "CWE-89",
+  "severity": "HIGH",
+  "code_paths": ["src/db.c:42"],
+  "message": "User-controlled input concatenated into SQL query"
+}
 ```
 
 **Multi-location finding (taint flow):**
 
 ```json
-{"rule_id": "py/taint", "rule_name": "Path traversal", "cwe": "CWE-22", "severity": "CRITICAL", "code_paths": ["src/input.py:15", "src/router.py:88", "src/filesystem.py:204"], "message": "Tainted data flows from user input to file open"}
+{
+  "rule_id": "py/taint",
+  "rule_name": "Path traversal",
+  "cwe": "CWE-22",
+  "severity": "CRITICAL",
+  "code_paths": [
+    "src/input.py:15",
+    "src/router.py:88",
+    "src/filesystem.py:204"
+  ],
+  "message": "Tainted data flows from user input to file open"
+}
 ```
 
 **Required fields:**
@@ -280,8 +304,19 @@ SAST tool's output can be converted to this IR by a thin wrapper.
 {
   "enabled": true,
   "severity_filter": ["CRITICAL", "HIGH"],
-  "cwe_allowlist": {"enabled": true, "cwes": ["CWE-89", "CWE-78", "CWE-79", "CWE-22", "CWE-787", "CWE-416", "CWE-502"]},
-  "rule_allowlist": {"enabled": false, "rules": []},
+  "cwe_allowlist": {
+    "enabled": true,
+    "cwes": [
+      "CWE-89",
+      "CWE-78",
+      "CWE-79",
+      "CWE-22",
+      "CWE-787",
+      "CWE-416",
+      "CWE-502"
+    ]
+  },
+  "rule_allowlist": { "enabled": false, "rules": [] },
   "per_rule_cap": 5,
   "total_cap": 50
 }

@@ -1,8 +1,6 @@
 # Security Summary: packages/api-secure
 
-**Path**: `packages/api-secure`
-**Files**: 12 source files
-**Subdirectories**: 1
+**Path**: `packages/api-secure` **Files**: 12 source files **Subdirectories**: 1
 
 ## Trust Boundaries & External Inputs
 
@@ -28,8 +26,7 @@
 
 **src/**: # Security Summary: packages/api-secure/src
 
-**Path**: `packages/api-secure/src`
-**Files**: 2 source files
+**Path**: `packages/api-secure/src` **Files**: 2 source files
 **Subdirectories**: 5
 
 ## Sensitive Operations

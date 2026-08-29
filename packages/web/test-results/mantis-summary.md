@@ -1,7 +1,6 @@
 # Security Summary: packages/web/test-results
 
-**Path**: `packages/web/test-results`
-**Files**: 2 source files
+**Path**: `packages/web/test-results` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Files in This Directory

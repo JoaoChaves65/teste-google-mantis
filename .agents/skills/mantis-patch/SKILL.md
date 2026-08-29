@@ -1,9 +1,11 @@
 ---
 name: mantis-patch
 description: >-
-  Generates minimal security fixes using transactional isolation (shadow directories or file backups), applies patches, and verifies them.
-  Use when security findings are successfully reproduced and need patches applied and verified.
-  Don't use for initial vulnerability research or reproduction payload generation.
+  Generates minimal security fixes using transactional isolation (shadow
+  directories or file backups), applies patches, and verifies them. Use when
+  security findings are successfully reproduced and need patches applied and
+  verified. Don't use for initial vulnerability research or reproduction payload
+  generation.
 ---
 
 # Patcher (/mantis-patch)
@@ -284,10 +286,10 @@ Execute the patching and verification stage as follows:
      Skip branch isolation, testing, and re-attack steps for the chain finding
      itself.
 
-   - *Optional Parallel Trajectory Search:* If your framework supports
+   - _Optional Parallel Trajectory Search:_ If your framework supports
      subagents, you may spawn multiple concurrent subagents to design diverse
      patch implementations. Test all generated patches that successfully secure
-     the code without breaking standard functionality, and select the *best*
+     the code without breaking standard functionality, and select the _best_
      patch (e.g., the most minimal, readable, and idiomatic fix) rather than
      just the first one that works.
 
@@ -335,7 +337,6 @@ Execute the patching and verification stage as follows:
         concurrent agents.
      3. **Guaranteed Rollback**: Wrap all actions in error traps or
         `try...finally` blocks to restore the original state on failure.
-
      - **Option A: Temporary Directory Shadowing (Recommended / mandatory when
        pinned)**
 
@@ -503,8 +504,8 @@ Execute the patching and verification stage as follows:
        still requires the unpatched baseline to trigger. This only adds a
        re-baseline step to the re-attack path when the snapshot changed.
 
-3. **Post-Patch Verification Run:** *(Skip this step for binary-only targets
-   where no code patch was applied)*. To confirm the patch works, re-run the
+3. **Post-Patch Verification Run:** _(Skip this step for binary-only targets
+   where no code patch was applied)_. To confirm the patch works, re-run the
    reproducer script inside your isolated execution environment. Use the exact
    `"repro_file_path"` and `"run_command"` from the reproduction entry to verify
    the patch.
@@ -601,7 +602,6 @@ Execute the patching and verification stage as follows:
      reproduce" and NEVER emit `"VERIFIED_SECURE"` from a missing file. (This is
      also what Block F/Block G's "No such file"/`exit 127` → EVIDENCE ABSENT
      path enforces.)
-
    * **VERIFIED SECURE (all conditions REQUIRED):** Mark `patch_status` as
      `"VERIFIED_SECURE"` ONLY if ALL of the following hold:
 
@@ -683,8 +683,8 @@ Execute the patching and verification stage as follows:
      The patch was not tested against a live bug on the current snapshot;
      claiming it is secure would be a false authoritative verdict.
 
-4. **Extract Patch and Rollback Transaction:** *(Skip this step for binary-only
-   targets)*. Do not leave the codebase in an altered state. Once you have a
+4. **Extract Patch and Rollback Transaction:** _(Skip this step for binary-only
+   targets)_. Do not leave the codebase in an altered state. Once you have a
    final outcome (either `VERIFIED_SECURE` or you have exhausted your retries):
 
    - If successful, generate a unified diff representing your exact changes and

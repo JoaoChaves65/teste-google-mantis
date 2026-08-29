@@ -1,7 +1,6 @@
 # Security Summary: packages/api-vulnerable/src/security-lab
 
-**Path**: `packages/api-vulnerable/src/security-lab`
-**Files**: 6 source files
+**Path**: `packages/api-vulnerable/src/security-lab` **Files**: 6 source files
 **Subdirectories**: 1
 
 ## Trust Boundaries & External Inputs
@@ -23,11 +22,11 @@
 
 ## Subdirectory Rollups
 
-**secure-contrast/**: # Security Summary: packages/api-vulnerable/src/security-lab/secure-contrast
+**secure-contrast/**: # Security Summary:
+packages/api-vulnerable/src/security-lab/secure-contrast
 
-**Path**: `packages/api-vulnerable/src/security-lab/secure-contrast`
-**Files**: 7 source files
-**Subdirectories**: 0
+**Path**: `packages/api-vulnerable/src/security-lab/secure-contrast` **Files**:
+7 source files **Subdirectories**: 0
 
 ## T...
 

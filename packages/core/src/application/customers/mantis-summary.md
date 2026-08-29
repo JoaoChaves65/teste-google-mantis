@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/application/customers
 
-**Path**: `packages/core/src/application/customers`
-**Files**: 6 source files
+**Path**: `packages/core/src/application/customers` **Files**: 6 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

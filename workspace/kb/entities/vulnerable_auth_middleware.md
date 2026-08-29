@@ -1,13 +1,18 @@
 <!-- KB_SNAPSHOT: snap_20250829_01 -->
+
 # Auth Middleware (Vulnerable)
 
 ## Overview
-Authentication middleware for the vulnerable API variant. Lacks token revocation checks and account status validation.
+
+Authentication middleware for the vulnerable API variant. Lacks token revocation
+checks and account status validation.
 
 ## Location
+
 `packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts`
 
 ## Implementation
+
 ```typescript
 export const vulnerableAuthMiddleware = (
   req: AuthenticatedRequest,
@@ -54,18 +59,21 @@ export const vulnerableAuthMiddleware = (
 
 ## Missing Validations
 
-| Missing Check | Impact |
-|---------------|--------|
-| Token revocation check | Revoked tokens work until expiry |
-| Account status check | Inactive/banned users can authenticate |
-| Token type validation | Only checks `type !== 'access'` |
+| Missing Check          | Impact                                 |
+| ---------------------- | -------------------------------------- |
+| Token revocation check | Revoked tokens work until expiry       |
+| Account status check   | Inactive/banned users can authenticate |
+| Token type validation  | Only checks `type !== 'access'`        |
 
 ## Secure Contrast
-See [Secure Auth Middleware](../entities/auth_middleware.md) for secure implementation.
+
+See [Secure Auth Middleware](../entities/auth_middleware.md) for secure
+implementation.
 
 ## Associated Vulnerabilities
+
 - [CWE-306: Missing Authentication for Critical Function](../vulnerabilities/CWE-306.md)
 
 ---
 
-*Last updated: Pass 1 — KB_SNAPSHOT: snap_20250829_01*
+_Last updated: Pass 1 — KB_SNAPSHOT: snap_20250829_01_

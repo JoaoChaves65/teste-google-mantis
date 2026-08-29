@@ -1,8 +1,6 @@
 # Security Summary: packages/tsconfig
 
-**Path**: `packages/tsconfig`
-**Files**: 4 source files
-**Subdirectories**: 0
+**Path**: `packages/tsconfig` **Files**: 4 source files **Subdirectories**: 0
 
 ## Files in This Directory
 

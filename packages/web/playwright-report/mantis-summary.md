@@ -1,7 +1,6 @@
 # Security Summary: packages/web/playwright-report
 
-**Path**: `packages/web/playwright-report`
-**Files**: 2 source files
+**Path**: `packages/web/playwright-report` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs

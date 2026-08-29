@@ -1,9 +1,10 @@
 ---
 name: mantis-threat-model
 description: >-
-  Synthesizes trust boundaries, attack surfaces, and attacker profiles into a living threat model.
-  Use as Stage B of the Knowledge Base generation process, reading architecture and entity definitions from the KB.
-  Don't use for analyzing source code or extracting raw learnings from JSONL files.
+  Synthesizes trust boundaries, attack surfaces, and attacker profiles into a
+  living threat model. Use as Stage B of the Knowledge Base generation process,
+  reading architecture and entity definitions from the KB. Don't use for
+  analyzing source code or extracting raw learnings from JSONL files.
 ---
 
 # Threat Modeler (/mantis-threat-model)
@@ -107,8 +108,8 @@ takes Block A step 0's FINDINGS-ONLY path: SKIP Block A steps 2–6, but STILL
 read `active_snapshot` from state for provenance, and NEVER stop merely because
 a code root is unset or unpinned.
 
-Maintain a high-level Threat Model that explicitly defines *who* the attackers
-are and *where* they can interact with the system, relying on the pre-processed
+Maintain a high-level Threat Model that explicitly defines _who_ the attackers
+are and _where_ they can interact with the system, relying on the pre-processed
 entities in the KB.
 
 Execute the threat modeling process as follows:

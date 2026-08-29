@@ -1,7 +1,6 @@
 # Security Summary: packages/core/src/domain
 
-**Path**: `packages/core/src/domain`
-**Files**: 18 source files
+**Path**: `packages/core/src/domain` **Files**: 18 source files
 **Subdirectories**: 6
 
 ## Trust Boundaries & External Inputs
@@ -28,62 +27,52 @@
 
 **service/**: # Security Summary: packages/core/src/domain/service
 
-**Path**: `packages/core/src/domain/service`
-**Files**: 1 source files
+**Path**: `packages/core/src/domain/service` **Files**: 1 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summary.md`
-...
-**appointment/**: # Security Summary: packages/core/src/domain/appointment
+- `mantis-summary.md` ... **appointment/**: # Security Summary:
+  packages/core/src/domain/appointment
 
-**Path**: `packages/core/src/domain/appointment`
-**Files**: 1 source files
+**Path**: `packages/core/src/domain/appointment` **Files**: 1 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summar...
-**barber/**: # Security Summary: packages/core/src/domain/barber
+- `mantis-summar... **barber/**: # Security Summary:
+  packages/core/src/domain/barber
 
-**Path**: `packages/core/src/domain/barber`
-**Files**: 1 source files
+**Path**: `packages/core/src/domain/barber` **Files**: 1 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summary.md`
-...
-**user/**: # Security Summary: packages/core/src/domain/user
+- `mantis-summary.md` ... **user/**: # Security Summary:
+  packages/core/src/domain/user
 
-**Path**: `packages/core/src/domain/user`
-**Files**: 1 source files
+**Path**: `packages/core/src/domain/user` **Files**: 1 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summary.md`
-...
-**transaction/**: # Security Summary: packages/core/src/domain/transaction
+- `mantis-summary.md` ... **transaction/**: # Security Summary:
+  packages/core/src/domain/transaction
 
-**Path**: `packages/core/src/domain/transaction`
-**Files**: 1 source files
+**Path**: `packages/core/src/domain/transaction` **Files**: 1 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summar...
-**customer/**: # Security Summary: packages/core/src/domain/customer
+- `mantis-summar... **customer/**: # Security Summary:
+  packages/core/src/domain/customer
 
-**Path**: `packages/core/src/domain/customer`
-**Files**: 1 source files
+**Path**: `packages/core/src/domain/customer` **Files**: 1 source files
 **Subdirectories**: 0
 
 ## Files in This Directory
 
-- `mantis-summary.md`
-...
+- `mantis-summary.md` ...
 
 ## Files in This Directory
 

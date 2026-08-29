@@ -1,7 +1,6 @@
 # Security Summary: packages/api-vulnerable/src/auth
 
-**Path**: `packages/api-vulnerable/src/auth`
-**Files**: 2 source files
+**Path**: `packages/api-vulnerable/src/auth` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## API Endpoints & Exports

@@ -1,16 +1,12 @@
 # Security Summary: infra/db
 
-**Path**: `infra/db`
-**Files**: 1 source files
-**Subdirectories**: 1
+**Path**: `infra/db` **Files**: 1 source files **Subdirectories**: 1
 
 ## Subdirectory Rollups
 
 **init/**: # Security Summary: infra/db/init
 
-**Path**: `infra/db/init`
-**Files**: 2 source files
-**Subdirectories**: 0
+**Path**: `infra/db/init` **Files**: 2 source files **Subdirectories**: 0
 
 ## Sensitive Operations
 

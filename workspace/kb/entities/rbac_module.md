@@ -1,18 +1,27 @@
 <!-- KB_SNAPSHOT: snap_20250829_01 -->
-# RBAC Module (Secure)
+
+# Secure RBAC Module
 
 ## Overview
-Role-Based Access Control middleware for the secure API variant. Implements strict role hierarchy enforcement.
+
+Role-Based Access Control middleware for the secure API variant. Implements
+strict role hierarchy enforcement.
 
 ## Location
+
 `packages/api-secure/src/http/middleware/rbac.ts`
 
 ## Implementation
+
 ```typescript
 export type UserRole = 'CUSTOMER' | 'BARBER' | 'ADMIN';
 
 export const requireRole = (...allowedRoles: UserRole[]) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
+  return (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): void => {
     if (!req.user) {
       res.status(401).json({ error: 'Authentication required' });
       return;
@@ -30,7 +39,11 @@ export const requireRole = (...allowedRoles: UserRole[]) => {
 
 export const requireAdmin = requireRole('ADMIN');
 export const requireBarberOrAdmin = requireRole('BARBER', 'ADMIN');
-export const requireCustomerOrAbove = requireRole('CUSTOMER', 'BARBER', 'ADMIN');
+export const requireCustomerOrAbove = requireRole(
+  'CUSTOMER',
+  'BARBER',
+  'ADMIN'
+);
 ```
 
 ## Route-Level Usage
@@ -53,15 +66,17 @@ router.use(requireCustomerOrAbove);
 
 ## Predefined Role Combinations
 
-| Export | Roles | Use Case |
-|--------|-------|----------|
-| `requireAdmin` | `['ADMIN']` | Admin-only endpoints |
-| `requireBarberOrAdmin` | `['BARBER', 'ADMIN']` | Barber management |
+| Export                   | Roles                             | Use Case                  |
+| ------------------------ | --------------------------------- | ------------------------- |
+| `requireAdmin`           | `['ADMIN']`                       | Admin-only endpoints      |
+| `requireBarberOrAdmin`   | `['BARBER', 'ADMIN']`             | Barber management         |
 | `requireCustomerOrAbove` | `['CUSTOMER', 'BARBER', 'ADMIN']` | Customer-facing endpoints |
 
 ## Vulnerable Contrast
-See [Vulnerable RBAC Middleware](../entities/vulnerable_rbac_middleware.md) for the broken implementation.
+
+See [Vulnerable RBAC Middleware](vulnerable_rbac_middleware.md) for the broken
+implementation.
 
 ---
 
-*Last updated: Pass 1 — KB_SNAPSHOT: snap_20250829_01*
+_Last updated: Pass 1 — KB_SNAPSHOT: snap_20250829_01_

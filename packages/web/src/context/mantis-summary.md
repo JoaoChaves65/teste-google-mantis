@@ -1,7 +1,6 @@
 # Security Summary: packages/web/src/context
 
-**Path**: `packages/web/src/context`
-**Files**: 2 source files
+**Path**: `packages/web/src/context` **Files**: 2 source files
 **Subdirectories**: 0
 
 ## Sensitive Operations

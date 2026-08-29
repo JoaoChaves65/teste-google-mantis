@@ -1,9 +1,10 @@
 ---
 name: mantis-meta-agent
 description: >-
-  Acts as the persistent supervisor, launching and monitoring the automated review campaign.
-  Use when running a long-running, continuous security review campaign that needs autonomous coordination.
-  Don't use for executing individual review stages directly.
+  Acts as the persistent supervisor, launching and monitoring the automated
+  review campaign. Use when running a long-running, continuous security review
+  campaign that needs autonomous coordination. Don't use for executing
+  individual review stages directly.
 ---
 
 # Meta-Agent Orchestrator (/mantis-meta-agent)
@@ -178,7 +179,7 @@ Execute your orchestration duties in a continuous loop:
 
         SYNC (very first action of the pass; ONLY if a sync was requested; NEVER
         mid-pass): STEP 0 - HIDE MANTIS ARTIFACTS from dirtiness:
-        mantis-summary.md, *.bak-*, workspace/, .mantis_snapshots/ MUST be
+        mantis-summary.md, _.bak-_, workspace/, .mantis_snapshots/ MUST be
         invisible to every dirty check. Delete stray `mantis-summary.md` and
         UUID-shaped `*.bak-<uuid>` files at the LIVE root first (same narrow
         glob as the SCOPE rule above — never the broad `*.bak-*` glob for
@@ -281,7 +282,7 @@ Execute your orchestration duties in a continuous loop:
              \<state_root>/.mantis_snapshots/pass\_\<N> (MUST NOT contain the
              path segment "/workspace/"). Copy EXCLUDING .git .hg .repo .svn CVS
              nested submodule VCS dirs, workspace/, .mantis_snapshots/,
-             mantis-summary.md, and *.bak-* (same hide-list as STEP 0, so a
+             mantis-summary.md, and _.bak-_ (same hide-list as STEP 0, so a
              colocated state_root cannot cause recursive self-copy); dereference
              symlinks pointing INSIDE the tree; DROP symlinks pointing outside;
              smudge LFS content if the analysis needs it. If `state_root` itself

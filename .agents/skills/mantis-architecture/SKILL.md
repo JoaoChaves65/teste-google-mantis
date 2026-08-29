@@ -1,9 +1,10 @@
 ---
 name: mantis-architecture
 description: >-
-  Synthesizes raw learnings and codebase analysis into an interlinked Markdown Knowledge Base (KB).
-  Use at the beginning of a loop to build or update architecture.md, entities, and vulnerabilities.
-  Don't use for generating threat models or formulating execution plans.
+  Synthesizes raw learnings and codebase analysis into an interlinked Markdown
+  Knowledge Base (KB). Use at the beginning of a loop to build or update
+  architecture.md, entities, and vulnerabilities. Don't use for generating
+  threat models or formulating execution plans.
 ---
 
 # Architect (/mantis-architecture)
@@ -251,7 +252,7 @@ VCS):**
        LOW_CRITICALITY if applicable). Incorporate trajectory insights here.
      - `workspace/kb/vulnerabilities/[CWE-ID_or_BugClass].md`: Descriptions of
        bug classes (e.g., `CWE-79.md` or `Memory-Corruption.md`) that have been
-       historically relevant to this codebase, including examples of what *not*
+       historically relevant to this codebase, including examples of what _not_
        to do.
      - `workspace/kb/index.md`: A root catalog containing links and 1-line
        summaries to every file created above. This is the map the Planner will

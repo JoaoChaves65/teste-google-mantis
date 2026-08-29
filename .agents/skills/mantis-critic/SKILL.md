@@ -1,9 +1,10 @@
 ---
 name: mantis-critic
 description: >-
-  Assesses the production viability of findings, filtering out debug-only features and assertion traps.
-  Use when findings have been validated and you need to confirm they are triggerable in production release builds (with assertions disabled).
-  Don't use for writing reproduction scripts or patches.
+  Assesses the production viability of findings, filtering out debug-only
+  features and assertion traps. Use when findings have been validated and you
+  need to confirm they are triggerable in production release builds (with
+  assertions disabled). Don't use for writing reproduction scripts or patches.
 ---
 
 # Critic (/mantis-critic)
@@ -166,7 +167,6 @@ Execute the critic evaluation as follows:
       architecture writes in its state-stamp step).
    3. Else `""` (no prior KB provenance). The blanket mass-mark below is gated
       as follows:
-
    - **MODE-OFF** (no `active_snapshot` in state — no `--sync`): SKIP the
      freshness gate entirely. The blanket `SAMPLE_OR_TEST` mass-mark is
      permitted as today (byte-for-byte today's behavior) — the KB was built

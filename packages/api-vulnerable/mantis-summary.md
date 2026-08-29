@@ -1,7 +1,6 @@
 # Security Summary: packages/api-vulnerable
 
-**Path**: `packages/api-vulnerable`
-**Files**: 12 source files
+**Path**: `packages/api-vulnerable` **Files**: 12 source files
 **Subdirectories**: 1
 
 ## Sensitive Operations
@@ -12,8 +11,7 @@
 
 **src/**: # Security Summary: packages/api-vulnerable/src
 
-**Path**: `packages/api-vulnerable/src`
-**Files**: 6 source files
+**Path**: `packages/api-vulnerable/src` **Files**: 6 source files
 **Subdirectories**: 6
 
 ## Sensitive Operations
@@ -21,6 +19,7 @@
 - `main.ts`
 
 ## Subdirectory Rollups
+
 ...
 
 ## Files in This Directory

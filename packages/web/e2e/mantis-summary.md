@@ -1,8 +1,6 @@
 # Security Summary: packages/web/e2e
 
-**Path**: `packages/web/e2e`
-**Files**: 15 source files
-**Subdirectories**: 0
+**Path**: `packages/web/e2e` **Files**: 15 source files **Subdirectories**: 0
 
 ## Trust Boundaries & External Inputs
 
