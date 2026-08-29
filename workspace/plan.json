@@ -1,0 +1,167 @@
+{
+  "investigations": [
+    {
+      "title": "Exhaustive Review: Vulnerable SQL Injection Repository",
+      "target_files": ["packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-89.md",
+        "workspace/kb/entities/vulnerable_appointment_repository.md",
+        "workspace/kb/entities/sql_executor.md"
+      ],
+      "question": "Audit the VulnerableAppointmentRepository for SQL injection vulnerabilities. Trace all public methods (findById, findByCustomerId, findByBarberId, findByStatus, findByCustomerIdAndStatus, findByDateRange) and verify if they use string concatenation instead of parameterized queries. Confirm that the SQL injection payloads in the test file (sql-injection.test.ts) successfully exploit these endpoints. Trace the data flow from HTTP request -> route handler -> use case -> repository -> SQL executor to confirm the injection path is viable. Compare with PgAppointmentRepository (secure implementation) to confirm the fix pattern."
+    },
+    {
+      "title": "Exhaustive Review: IDOR Vulnerabilities in Customer Routes",
+      "target_files": ["packages/api-vulnerable/src/api/v1/customers.routes.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-639.md",
+        "workspace/kb/entities/customer_routes_vulnerable.md",
+        "workspace/kb/entities/customer_routes_secure.md",
+        "workspace/kb/vulnerabilities/CWE-639.md"
+      ],
+      "question": "Audit the customer routes for IDOR vulnerabilities. Focus on GET /customers/:id and PATCH /customers/:id endpoints. Verify that the vulnerableRequireRole middleware allows CUSTOMER role to access any customer ID without ownership validation. Trace the code path from HTTP request -> vulnerableRequireRole -> getCustomer.execute -> response. Compare with the secure implementation in customer_routes_secure.ts which uses checkCustomerAccess middleware. Identify the exact lines where ownership validation is missing."
+    },
+    {
+      "title": "Exhaustive Review: IDOR Vulnerabilities in Appointment Routes",
+      "target_files": ["packages/api-vulnerable/src/api/v1/appointments.routes.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-639.md",
+        "workspace/kb/entities/appointment_routes_vulnerable.md",
+        "workspace/kb/entities/appointment_routes_secure.md",
+        "workspace/kb/vulnerabilities/CWE-639.md"
+      ],
+      "question": "Audit the appointment routes for IDOR vulnerabilities. Focus on GET /appointments/:id and PATCH /appointments/:id/status endpoints. Verify that the vulnerable implementation lacks any ownership validation - any authenticated user can access/modify any appointment by ID. Compare with the secure implementation in appointment_routes_secure.md which uses checkAppointmentAccess middleware. Trace the code path from HTTP request -> route handler -> use case (GetAppointment/CancelAppointment) to confirm no ownership validation occurs in the vulnerable version."
+    },
+    {
+      "title": "Exhaustive Review: IDOR Vulnerabilities in Barber Routes",
+      "target_files": ["packages/api-vulnerable/src/api/v1/barbers.routes.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-639.md",
+        "workspace/kb/entities/barber_routes_vulnerable.md",
+        "workspace/kb/entities/barber_routes_secure.md",
+        "workspace/kb/vulnerabilities/CWE-639.md"
+      ],
+      "question": "Audit the barber routes for IDOR vulnerabilities. Focus on GET /barbers/:id endpoint. Verify that the vulnerable implementation lacks any ownership check - any authenticated user can access any barber's data by ID. Compare with the secure implementation in barber_routes_secure.md which uses checkBarberAccess middleware. Trace the code path from HTTP request -> route handler -> getBarber use case to confirm missing ownership validation."
+    },
+    {
+      "title": "Exhaustive Review: IDOR in User Routes and Sensitive Data Exposure",
+      "target_files": ["packages/api-vulnerable/src/api/v1/users.routes.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-639.md",
+        "workspace/kb/vulnerabilities/CWE-200.md",
+        "workspace/kb/entities/user_entity.md",
+        "workspace/kb/entities/user_routes_vulnerable.md"
+      ],
+      "question": "Audit the user routes for IDOR and sensitive data exposure. Focus on GET /users and GET /users/:id endpoints. Verify that the vulnerable implementation exposes passwordHash in both list and single user responses. Trace the code path from HTTP request -> listUsers/getUser use cases -> response serialization to confirm passwordHash is included in the JSON response. Compare with secure implementation which explicitly excludes passwordHash from response DTOs."
+    },
+    {
+      "title": "Exhaustive Review: Mass Assignment Vulnerabilities in User/Customer/Barber/Service Routes",
+      "target_files": [
+        "packages/api-vulnerable/src/api/v1/users.routes.ts",
+        "packages/api-vulnerable/src/api/v1/customers.routes.ts",
+        "packages/api-vulnerable/src/api/v1/barbers.routes.ts",
+        "packages/api-vulnerable/src/api/v1/services.routes.ts"
+      ],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-915.md",
+        "workspace/kb/entities/user_routes_vulnerable.md",
+        "workspace/kb/entities/customer_routes_vulnerable.md",
+        "workspace/kb/entities/barber_routes_vulnerable.md",
+        "workspace/kb/entities/service_routes_vulnerable.md",
+        "workspace/kb/vulnerabilities/CWE-915.md"
+      ],
+      "question": "Audit mass assignment vulnerabilities across all vulnerable routes. Focus on: 1) POST /api/v1/users accepting 'role' field allowing privilege escalation to ADMIN, 2) POST/PATCH /api/v1/customers accepting 'role' field, 3) POST/PATCH /api/v1/barbers accepting 'active' field, 4) POST/PATCH /api/v1/services accepting 'active' field. For each, trace the data flow: HTTP request -> Zod schema validation -> handler -> use case -> domain entity creation. Verify that the vulnerable schemas include privileged fields (role, active) and that handlers pass them directly to domain factories. Contrast with secure implementations where schemas exclude privileged fields and handlers set defaults server-side."
+    },
+    {
+      "title": "Exhaustive Review: Broken RBAC in Vulnerable API",
+      "target_files": [
+        "packages/api-vulnerable/src/http/middleware/vulnerableRbac.ts",
+        "packages/api-vulnerable/src/api/v1/users.routes.ts",
+        "packages/api-vulnerable/src/api/v1/transactions.routes.ts",
+        "packages/api-vulnerable/src/api/v1/barbers.routes.ts",
+        "packages/api-vulnerable/src/api/v1/services.routes.ts"
+      ],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-285.md",
+        "workspace/kb/entities/vulnerable_rbac_middleware.md",
+        "workspace/kb/entities/rbac_module.md"
+      ],
+      "question": "Audit the broken RBAC implementation in the vulnerable API. Focus on: 1) The vulnerableRequireRole middleware logic that allows CUSTOMER to access ADMIN endpoints if CUSTOMER is in allowedRoles, 2) Routes that lack RBAC middleware entirely (users.routes.ts, transactions.routes.ts, barbers.routes.ts, services.routes.ts in api-vulnerable). Trace the middleware chain: HTTP request -> vulnerableRequireRole -> route handler. Compare with secure implementation where routes use requireAdmin middleware that strictly checks userRole === 'ADMIN'."
+    },
+    {
+      "title": "Exhaustive Review: SQL Injection in VulnerableAppointmentRepository",
+      "target_files": ["packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-89.md",
+        "workspace/kb/entities/vulnerable_appointment_repository.md",
+        "workspace/kb/entities/sql_executor.md"
+      ],
+      "question": "Audit the VulnerableAppointmentRepository for SQL injection vulnerabilities. Focus on methods: findById, findByCustomerId, findByBarberId, findByStatus, findByCustomerIdAndStatus, findByDateRange. For each method, trace the SQL query construction: verify string concatenation is used instead of parameterized queries. Confirm that the test payloads in sql-injection.test.ts (e.g., '1\\' OR \\'1\\'=\\'1\\' --') successfully exploit these methods. Compare with the secure PgAppointmentRepository implementation which uses parameterized queries ($1, $2)."
+    },
+    {
+      "title": "Exhaustive Review: Sensitive Data Exposure in User Routes",
+      "target_files": ["packages/api-vulnerable/src/api/v1/users.routes.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-200.md",
+        "workspace/kb/entities/user_entity.md",
+        "workspace/kb/entities/user_routes_vulnerable.md"
+      ],
+      "question": "Audit the user routes for sensitive data exposure. Focus on GET /api/v1/users and GET /api/v1/users/:id endpoints. Verify that the vulnerable implementation includes passwordHash in the JSON response for both list and single user endpoints. Trace the code path: HTTP request -> listUsers/getUser use case -> usersRepo.findAll/findById -> response serialization. Confirm that the User entity includes passwordHash field and that the vulnerable implementation serializes it directly to JSON. Contrast with secure implementation which explicitly excludes passwordHash from response DTOs."
+    },
+    {
+      "title": "Exhaustive Review: SQL Injection Vulnerable Repository",
+      "target_files": ["packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-89.md",
+        "workspace/kb/entities/vulnerable_appointment_repository.md",
+        "workspace/kb/entities/sql_executor.md"
+      ],
+      "question": "Audit the VulnerableAppointmentRepository for SQL injection vulnerabilities. Focus on methods: findById, findByCustomerId, findByBarberId, findByStatus, findByCustomerIdAndStatus, findByDateRange. For each method, trace the SQL query construction: verify string concatenation is used instead of parameterized queries. Confirm that the test payloads in sql-injection.test.ts (e.g., '1\\' OR \\'1\\'=\\'1\\' --') successfully exploit these methods. Compare with the secure PgAppointmentRepository implementation which uses parameterized queries ($1, $2)."
+    },
+    {
+      "title": "Exhaustive Review: Error Disclosure in Vulnerable Error Handler",
+      "target_files": ["packages/api-vulnerable/src/http/middleware/vulnerableErrorHandler.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-200.md",
+        "workspace/kb/entities/vulnerable_auth_middleware.md"
+      ],
+      "question": "Audit the vulnerable error handler for excessive error disclosure. Focus on the error handling middleware that exposes stack traces, internal error details, and SQL details in 500, 404, and validation error responses. Trace the error handling flow: HTTP error -> vulnerableErrorHandler -> response serialization. Confirm that stack traces, internal error details, and SQL details are exposed in 500, 404, and validation error responses. Contrast with the secure error handler which sanitizes errors."
+    },
+    {
+      "title": "Exhaustive Review: Broken Authentication Middleware",
+      "target_files": ["packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-306.md",
+        "workspace/kb/entities/vulnerable_auth_middleware.md"
+      ],
+      "question": "Audit the vulnerable authentication middleware for missing authentication checks. Focus on: 1) No token revocation check - revoked tokens work until expiry, 2) No account status check - inactive/banned users can still authenticate, 3) No token type validation beyond basic 'access' type check. Trace the authentication flow: HTTP request -> vulnerableAuthMiddleware -> token verification -> user context population. Contrast with secure implementation which checks token revocation via RefreshTokenRepository and validates account status via UserStatus.ACTIVE."
+    },
+    {
+      "title": "Exhaustive Review: Vulnerable Appointment Repository SQL Injection",
+      "target_files": ["packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-89.md",
+        "workspace/kb/entities/vulnerable_appointment_repository.md",
+        "workspace/kb/entities/sql_executor.md"
+      ],
+      "question": "Audit the VulnerableAppointmentRepository for SQL injection vulnerabilities. Focus on methods: findById, findByCustomerId, findByBarberId, findByStatus, findByCustomerIdAndStatus, findByDateRange. For each method, trace the SQL query construction: verify string concatenation is used instead of parameterized queries. Confirm that the test payloads in sql-injection.test.ts (e.g., '1\\' OR \\'1\\'=\\'1\\' --') successfully exploit these methods. Compare with the secure PgAppointmentRepository implementation which uses parameterized queries ($1, $2)."
+    },
+    {
+      "title": "Exhaustive Review: Vulnerable Appointment Repository Secure Methods Contrast",
+      "target_files": ["packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts"],
+      "kb_references": [
+        "workspace/kb/vulnerabilities/CWE-89.md",
+        "workspace/kb/entities/vulnerable_appointment_repository.md",
+        "workspace/kb/entities/pg_appointment_repository.md"
+      ],
+      "question": "Compare the vulnerable and secure methods in VulnerableAppointmentRepository. Focus on the 'Safe' methods (findByIdSafe, findByCustomerIdSafe) which use parameterized queries. Verify that these methods use parameterized queries ($1, $2) while the vulnerable methods use string concatenation. Confirm that the safe methods are NOT exposed via the vulnerable API routes, only the vulnerable methods are. Analyze why both implementations exist in the same class."
+    },
+    {
+      "title": "Exhaustive Review: Secure Contrast Tests Validation",
+      "target_files": ["packages/api-vulnerable/src/security-lab/secure-contrast/*.test.ts"],
+      "kb_references": ["workspace/kb/index.md", "workspace/kb/secure-contrast/"],
+      "question": "Validate that the secure contrast tests correctly demonstrate the secure behavior for each vulnerability class. For each secure contrast test file (idor-secure-contrast, broken-rbac-secure-contrast, mass-assignment-secure-contrast, sql-injection-secure-contrast, error-disclosure-secure-contrast, sensitive-data-secure-contrast), verify: 1) The test exercises the SECURE API endpoint, 2) The test expects the secure behavior (403/400/blocked), 3) The test validates that the vulnerability is actually prevented. These tests serve as regression tests for the secure implementation."
+    }
+  ],
+  "dependencies_json_path": "workspace/kb/dependencies.json"
+}
