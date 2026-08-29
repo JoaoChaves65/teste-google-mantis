@@ -1,0 +1,32 @@
+{
+  "id": "chain-002",
+  "title": "Exploit Chain: Banned User Authentication Bypass \u2192 RBAC Bypass \u2192 Credential Theft",
+  "description": "Step 1: Banned/INACTIVE user can still authenticate because vulnerableAuth middleware does not check user.status (finding-031, CWE-306). Step 2: Authenticated banned user exploits broken RBAC middleware (finding-020, CWE-285) which allows CUSTOMER role to access ADMIN-only endpoints. Step 3: Attacker accesses GET /api/v1/users and GET /api/v1/users/:id endpoints (finding-025,027, CWE-200) which expose password hashes of ALL users in the system.",
+  "impact": "Banned users retain full system access and can escalate to admin-level data access, exfiltrating all user password hashes for offline cracking.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "user_interaction": "NONE",
+  "code_paths": [
+    "packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts:12-52",
+    "packages/api-vulnerable/src/http/middleware/vulnerableRbac.ts",
+    "packages/api-vulnerable/src/api/v1/users.routes.ts"
+  ],
+  "attacker_position": "EXTERNAL",
+  "mitigation": "1) Add user.status === ACTIVE check in authentication middleware. 2) Fix vulnerableRequireRole middleware logic. 3) Remove password_hash from API responses. 4) Implement account status validation in login/refresh commands.",
+  "status": "VALID",
+  "production_viability": "SAMPLE_OR_TEST",
+  "repro_status": "not_attempted",
+  "constituent_findings": ["finding-031", "finding-020", "finding-025", "finding-027"],
+  "signature": "f753e31a630e72b8",
+  "lineage_id": "ecf4b74c-1070-4167-8107-ead97d38bd19",
+  "discovery_commit": "snap_20250829_01",
+  "history": [
+    {
+      "stage": "chainer",
+      "action": "created",
+      "details": "Constructed by chaining findings finding-031, finding-020, finding-025, finding-027.",
+      "pass_number": 2,
+      "timestamp": "2026-08-29T20:16:07.558673Z"
+    }
+  ]
+}

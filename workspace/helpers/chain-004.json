@@ -1,0 +1,19 @@
+{
+  "chain_id": "chain-004",
+  "title": "Exploit Chain: SQL Injection to Cross-User Appointment Data Exfiltration",
+  "description": "Step 1: Attacker exploits SQL injection in VulnerableAppointmentRepository.findByStatus (finding-004, CWE-89) using payload to bypass status filter and retrieve appointments of ALL statuses. Step 2: SQL injection in findByCustomerIdAndStatus (finding-005, CWE-89) bypasses both customer_id and status filters to retrieve ALL appointments across ALL customers. Step 3: Confirmed via IDOR endpoints (finding-009,010, CWE-639) that appointments of other customers are accessible. Combined blast radius: complete appointment database exfiltration.",
+  "impact": "Complete appointment database exfiltration across all customers and barbers. Attacker retrieves all appointments regardless of status, customer, or date range.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "user_interaction": "NONE",
+  "code_paths": [
+    "packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts:44-48",
+    "packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts:50-57",
+    "packages/api-vulnerable/src/api/v1/appointments.routes.ts"
+  ],
+  "attacker_position": "EXTERNAL",
+  "mitigation": "1) Replace all string concatenation with parameterized queries in VulnerableAppointmentRepository. 2) Use the safe methods (findByStatusSafe, etc.) as reference. 3) Add ownership verification in appointment endpoints.",
+  "constituent_findings": ["finding-004", "finding-005", "finding-009", "finding-010"],
+  "constituent_signatures": ["c3d4e5f6a7b8c9d0", "d4e5f6a7b8c9d0e1", "f6a7b8c9d0e1f2a3", "b8c9d0e1f2a3b4c5"],
+  "discovery_commit": "snap_20250829_01"
+}

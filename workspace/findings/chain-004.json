@@ -1,0 +1,32 @@
+{
+  "id": "chain-004",
+  "title": "Exploit Chain: SQL Injection to Cross-User Appointment Data Exfiltration",
+  "description": "Step 1: Attacker exploits SQL injection in VulnerableAppointmentRepository.findByStatus (finding-004, CWE-89) using payload to bypass status filter and retrieve appointments of ALL statuses. Step 2: SQL injection in findByCustomerIdAndStatus (finding-005, CWE-89) bypasses both customer_id and status filters to retrieve ALL appointments across ALL customers. Step 3: Confirmed via IDOR endpoints (finding-009,010, CWE-639) that appointments of other customers are accessible. Combined blast radius: complete appointment database exfiltration.",
+  "impact": "Complete appointment database exfiltration across all customers and barbers. Attacker retrieves all appointments regardless of status, customer, or date range.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "user_interaction": "NONE",
+  "code_paths": [
+    "packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts:44-48",
+    "packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts:50-57",
+    "packages/api-vulnerable/src/api/v1/appointments.routes.ts"
+  ],
+  "attacker_position": "EXTERNAL",
+  "mitigation": "1) Replace all string concatenation with parameterized queries in VulnerableAppointmentRepository. 2) Use the safe methods (findByStatusSafe, etc.) as reference. 3) Add ownership verification in appointment endpoints.",
+  "status": "VALID",
+  "production_viability": "SAMPLE_OR_TEST",
+  "repro_status": "not_attempted",
+  "constituent_findings": ["finding-004", "finding-005", "finding-009", "finding-010"],
+  "signature": "c8b6de1c70c6f52a",
+  "lineage_id": "bcb9fcab-3eb5-4b53-9fa1-7f9a6c043ee6",
+  "discovery_commit": "snap_20250829_01",
+  "history": [
+    {
+      "stage": "chainer",
+      "action": "created",
+      "details": "Constructed by chaining findings finding-004, finding-005, finding-009, finding-010.",
+      "pass_number": 2,
+      "timestamp": "2026-08-29T20:19:50.919945Z"
+    }
+  ]
+}

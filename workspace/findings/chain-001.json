@@ -1,0 +1,43 @@
+{
+  "id": "chain-001",
+  "title": "Exploit Chain: Persistent Session Hijacking via Token Exposure + No Rotation + No Revocation + IDOR",
+  "description": "Step 1: Attacker obtains refresh_token from POST /api/v1/auth/login response (finding-028, CWE-200). Step 2: Refresh token never rotates on use (finding-033, CWE-613) - stolen token remains valid indefinitely. Step 3: Even if token is revoked, vulnerableAuth middleware does not check revocation (finding-030, CWE-306). Step 4: Attacker uses valid/stolen refresh token to obtain access tokens and access IDOR endpoints (finding-007,008,009,010 - CWE-639) to access cross-user data (customers, appointments, barbers).",
+  "impact": "Full persistent session hijacking with cross-user data access. Attacker can maintain indefinite access to any user account and exfiltrate all customer, appointment, and barber data without detection.",
+  "severity": "HIGH",
+  "privileges_required": "NONE",
+  "user_interaction": "NONE",
+  "code_paths": [
+    "packages/api-vulnerable/src/auth/routes.ts:69-70",
+    "packages/api-vulnerable/src/auth/routes.ts:80-95",
+    "packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts:12-52",
+    "packages/api-vulnerable/src/api/v1/customers.routes.ts:66-101",
+    "packages/api-vulnerable/src/api/v1/appointments.routes.ts",
+    "packages/api-vulnerable/src/api/v1/barbers.routes.ts"
+  ],
+  "attacker_position": "EXTERNAL",
+  "mitigation": "1) Remove refresh_token from login response body; use secure HttpOnly cookies. 2) Implement refresh token rotation (revoke old, issue new). 3) Add revocation check in authentication middleware. 4) Add ownership verification in all resource endpoints.",
+  "status": "VALID",
+  "production_viability": "SAMPLE_OR_TEST",
+  "repro_status": "not_attempted",
+  "constituent_findings": [
+    "finding-028",
+    "finding-033",
+    "finding-030",
+    "finding-007",
+    "finding-008",
+    "finding-009",
+    "finding-010"
+  ],
+  "signature": "252370e93a63da9e",
+  "lineage_id": "422e3d9f-3017-4b0b-a097-9bda694a7340",
+  "discovery_commit": "snap_20250829_01",
+  "history": [
+    {
+      "stage": "chainer",
+      "action": "created",
+      "details": "Constructed by chaining findings finding-028, finding-033, finding-030, finding-007, finding-008, finding-009, finding-010.",
+      "pass_number": 2,
+      "timestamp": "2026-08-29T20:15:12.204774Z"
+    }
+  ]
+}

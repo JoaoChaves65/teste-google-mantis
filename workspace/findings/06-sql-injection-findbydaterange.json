@@ -37,6 +37,14 @@
       "pass_number": 2,
       "snapshot": "snap_20250829_01",
       "timestamp": "2026-08-29T18:53:04.259000Z"
+    },
+    {
+      "stage": "calibrate",
+      "action": "calibrated",
+      "details": "Calculated risk score as 3.2 and priority as MEDIUM.",
+      "pass_number": 2,
+      "snapshot": "snap_20250829_01",
+      "timestamp": "2026-08-29T19:00:45.012050Z"
     }
   ],
   "reasoning": "Confirmed SQL injection in findByDateRange method at line 61: direct string concatenation of user-supplied 'startDate' and 'endDate' parameters into SQL query. Test confirms exploitability via sql-injection.test.ts lines 222-274 showing injection returning all appointments.",
@@ -84,5 +92,101 @@
     }
   },
   "production_viability": "SAMPLE_OR_TEST",
-  "critic_reasoning": "KB freshness gate passes (KB_SNAPSHOT: snap_20250829_01 == active SNAPSHOT_ID: snap_20250829_01). Threat model declares Intent: SAMPLE_OR_TEST_ONLY - this is an educational Security Lab with intentionally vulnerable API (api-vulnerable) for training. All findings reside in intentionally vulnerable demo code, not production deployable artifacts."
+  "critic_reasoning": "KB freshness gate passes (KB_SNAPSHOT: snap_20250829_01 == active SNAPSHOT_ID: snap_20250829_01). Threat model declares Intent: SAMPLE_OR_TEST_ONLY - this is an educational Security Lab with intentionally vulnerable API (api-vulnerable) for training. All findings reside in intentionally vulnerable demo code, not production deployable artifacts.",
+  "impact_score": 4,
+  "likelihood_score": 4,
+  "availability_tier": "STANDARD",
+  "inferred_exposure": "EXPOSED",
+  "mantis_risk_score": 3.2,
+  "priority": "MEDIUM",
+  "sanity_triage_applied": "static_confirmation; internal_nested; self_contained_blast",
+  "calibration_checklist": {
+    "repro_failure": {
+      "outcome": "DOES_NOT_APPLY",
+      "reason": "Tests in sql-injection.test.ts empirically confirm exploitability (returns all appointments via date range injection)"
+    },
+    "unreachable_inputs": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "third_party_reachability": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "minor_config_hygiene": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "non_security_critical": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "vague_code_paths": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "unreliable_triggers": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "prerequisite_shell": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "physical_long_term": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "trusted_controller_zero_delta": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "standard_host_attacks": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "static_confirmation": {
+      "outcome": "DOES_NOT_APPLY",
+      "reason": "Empirical test evidence proves reproduction; trace-lift applies"
+    },
+    "strict_xss": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "internal_nested": {
+      "outcome": "DOES_NOT_APPLY",
+      "reason": "attacker_position=EXTERNAL forces EXPOSED exposure per alignment rule"
+    },
+    "probabilistic_llm": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "supply_chain_prerequisites": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "non_default_config": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "confidential_computing_host": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "trusted_controller_critical_bypass": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "local_attack_vector": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "self_contained_blast": {
+      "outcome": "DOES_NOT_APPLY",
+      "reason": "Bypasses date filters, returns all users appointments across time ranges"
+    },
+    "rarely_exposed": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "equivalent_primitives": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "documented_insecure_config": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "physical_temporary": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "high_privilege_external": {
+      "outcome": "DOES_NOT_APPLY"
+    },
+    "trusted_controller_standard_bypass": {
+      "outcome": "DOES_NOT_APPLY"
+    }
+  },
+  "outrage_commentary": "SQL injection in intentionally vulnerable demo code (educational lab). Outrage factor low since not production. Fixing prevents developers from copying insecure patterns.",
+  "executive_summary": "SQL Injection (CWE-89) in VulnerableAppointmentRepository.findByDateRange. Impact 4 (systemic data exfiltration), Likelihood 4 (trivial, automated, tests confirm). SAMPLE_OR_TEST 0.4x scaling \u2192 3.2 MEDIUM. Not a production bug; fix demo code to prevent pattern copying."
 }

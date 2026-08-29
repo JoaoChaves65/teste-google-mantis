@@ -1,0 +1,19 @@
+{
+  "chain_id": "chain-005",
+  "title": "Exploit Chain: IDOR + Mass Assignment Privilege Escalation",
+  "description": "Step 1: Attacker (Customer A) uses IDOR in GET /api/v1/customers/:id (finding-007, CWE-639) to access Customer B's record. Step 2: Attacker uses mass assignment in PATCH /api/v1/customers/:id (finding-015, CWE-915) to escalate Customer B's role to ADMIN. Step 3: Customer B (now ADMIN) can access all admin endpoints including password hashes (finding-025,027, CWE-200). Step 4: Attacker logs in as Customer B with ADMIN privileges for persistent elevated access.",
+  "impact": "Horizontal privilege escalation via IDOR to target victim, then vertical privilege escalation via mass assignment to ADMIN, resulting in persistent admin access and credential theft.",
+  "severity": "HIGH",
+  "privileges_required": "LOW",
+  "user_interaction": "NONE",
+  "code_paths": [
+    "packages/api-vulnerable/src/api/v1/customers.routes.ts:66-101",
+    "packages/api-vulnerable/src/api/v1/customers.routes.ts:154-207",
+    "packages/api-vulnerable/src/api/v1/users.routes.ts"
+  ],
+  "attacker_position": "EXTERNAL",
+  "mitigation": "1) Add ownership verification in customer endpoints. 2) Remove role field from mass assignment in customer PATCH. 3) Remove password_hash from API responses.",
+  "constituent_findings": ["finding-007", "finding-015", "finding-025", "finding-027"],
+  "constituent_signatures": ["f6a7b8c9d0e1f2a3", "e5f6a7b8c9d0e1f2", "m3n4o5p6q7r8s9t0", "p6q7r8s9t0u1v2w3"],
+  "discovery_commit": "snap_20250829_01"
+}

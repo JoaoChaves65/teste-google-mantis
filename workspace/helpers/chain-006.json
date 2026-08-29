@@ -1,0 +1,19 @@
+{
+  "chain_id": "chain-006",
+  "title": "Exploit Chain: Authentication Control Compounding - Token Exposure + No Rotation + No Revocation + No Inactive Check",
+  "description": "Step 1: Refresh token exposed in login response (finding-028, CWE-200). Step 2: No refresh token rotation (finding-033, CWE-613) - stolen token valid for full 7-day lifetime. Step 3: No revocation check (finding-030, CWE-306) - even revoked tokens work. Step 4: No inactive account check (finding-031, CWE-306) - banned users can still authenticate. Combined: Any stolen refresh token provides persistent, undetectable access even for banned accounts.",
+  "impact": "Complete authentication control bypass. Stolen refresh tokens provide indefinite, undetectable access regardless of account status or revocation attempts. Token theft = permanent account compromise.",
+  "severity": "HIGH",
+  "privileges_required": "NONE",
+  "user_interaction": "NONE",
+  "code_paths": [
+    "packages/api-vulnerable/src/auth/routes.ts:69-70",
+    "packages/api-vulnerable/src/auth/routes.ts:80-95",
+    "packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts:12-52"
+  ],
+  "attacker_position": "EXTERNAL",
+  "mitigation": "1) Remove refresh_token from response body; use HttpOnly cookies. 2) Implement refresh token rotation with revocation. 3) Add revocation check in authentication middleware. 4) Add user.status === ACTIVE check in authentication flow.",
+  "constituent_findings": ["finding-028", "finding-033", "finding-030", "finding-031"],
+  "constituent_signatures": ["p6q7r8s9t0u1v2w3", "t0u1v2w3x4y5z6a7", "q7r8s9t0u1v2w3x4", "r8s9t0u1v2w3x4y5"],
+  "discovery_commit": "snap_20250829_01"
+}
