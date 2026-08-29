@@ -1,0 +1,25 @@
+import { createPasswordHasher } from './shared/password-hasher';
+import { PgUserRepository } from './infrastructure/database/repositories/user-repository';
+import { createSqlExecutor } from './infrastructure/database/sql-executor';
+import { LoginCommand } from './application/auth/login';
+
+async function test() {
+  const executor = createSqlExecutor();
+  const users = new (await import('./infrastructure/database/repositories/user-repository')).PgUserRepository(executor);
+  const passwordHasher = (await import('./shared/password-hasher')).createPasswordHasher();
+  const tokenService = (await import('./shared/token-service')).createTokenService();
+  const { RefreshTokenRepository } = await import('./persistence/interfaces');
+  const { PgRefreshTokenRepository } = await import('./infrastructure/database/repositories/refresh-token-repository');
+  const refreshTokens = new (await import('./infrastructure/database/repositories/refresh-token-repository')).PgRefreshTokenRepository(executor);
+  
+  const loginCommand = new LoginCommand(users, refreshTokens, passwordHasher, tokenService);
+  
+  const result = await loginCommand.execute({
+    email: 'test@barberlab.local',
+    password: 'validpassword123'
+  });
+  
+  console.log('Login result:', result);
+}
+
+test().catch(console.error);

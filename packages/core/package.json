@@ -1,0 +1,78 @@
+{
+  "name": "@barberlab/core",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./shared": {
+      "types": "./dist/shared/index.d.ts",
+      "import": "./dist/shared/index.js",
+      "require": "./dist/shared/index.js"
+    },
+    "./infrastructure": {
+      "types": "./dist/infrastructure/index.d.ts",
+      "import": "./dist/infrastructure/index.js",
+      "require": "./dist/infrastructure/index.js"
+    },
+    "./infrastructure/database": {
+      "types": "./dist/infrastructure/database/index.d.ts",
+      "import": "./dist/infrastructure/database/index.js",
+      "require": "./dist/infrastructure/database/index.js"
+    },
+    "./infrastructure/database/connection": {
+      "types": "./dist/infrastructure/database/connection.d.ts",
+      "import": "./dist/infrastructure/database/connection.js",
+      "require": "./dist/infrastructure/database/connection.js"
+    },
+    "./application": {
+      "types": "./dist/application/index.d.ts",
+      "import": "./dist/application/index.js",
+      "require": "./dist/application/index.js"
+    },
+    "./domain": {
+      "types": "./dist/domain/index.d.ts",
+      "import": "./dist/domain/index.js",
+      "require": "./dist/domain/index.js"
+    },
+    "./persistence": {
+      "types": "./dist/persistence/index.d.ts",
+      "import": "./dist/persistence/index.js",
+      "require": "./dist/persistence/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b && cp -r src/infrastructure/database/migrations dist/infrastructure/database/",
+    "dev": "tsc -b --watch",
+    "lint": "eslint src --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "node-pg-migrate up --migrations-dir src/infrastructure/database/migrations --migration-file-language js --config-file src/infrastructure/database/migrate-config.json",
+    "db:rollback": "node-pg-migrate down --migrations-dir src/infrastructure/database/migrations --migration-file-language js --config-file src/infrastructure/database/migrate-config.json",
+    "db:status": "node-pg-migrate up --dry-run --migrations-dir src/infrastructure/database/migrations --migration-file-language js --config-file src/infrastructure/database/migrate-config.json",
+    "db:create": "node-pg-migrate create --migrations-dir src/infrastructure/database/migrations --config-file src/infrastructure/database/migrate-config.json",
+    "db:seed": "tsx src/infrastructure/database/seeds/seed.ts",
+    "db:test": "vitest run src/infrastructure/database/tests"
+  },
+  "dependencies": {
+    "argon2": "^0.40.3",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.11.5",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@barberlab/tsconfig": "*",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.12.0",
+    "@types/pg": "^8.11.6",
+    "node-pg-migrate": "^8.0.4",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^3.2.6"
+  }
+}

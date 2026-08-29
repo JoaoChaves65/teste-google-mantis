@@ -1,0 +1,13 @@
+# Ignore root-level JavaScript utility scripts in api-secure
+packages/api-secure/check_constraints.js
+packages/api-secure/check_db.js
+packages/api-secure/check_db2.js
+packages/api-secure/check_users.js
+packages/api-secure/test_truncate.js
+
+# Ignore vitest.db-setup.ts
+packages/api-secure/vitest.db-setup.ts
+
+# Ignore node_modules
+node_modules
+dist

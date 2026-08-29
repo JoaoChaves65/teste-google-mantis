@@ -1,0 +1,41 @@
+{
+  "name": "barberlab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BarberLab - Security Lab Educational Project",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=@barberlab/api-secure\" \"npm run dev --workspace=@barberlab/web\"",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present && npm run lint:root",
+    "lint:root": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "check:boundaries": "node scripts/check-boundaries.js",
+    "db:migrate": "npm run db:migrate --workspace=@barberlab/core",
+    "db:rollback": "npm run db:rollback --workspace=@barberlab/core",
+    "db:seed": "npm run db:seed --workspace=@barberlab/core",
+    "db:test": "npm run db:test --workspace=@barberlab/core",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.32.0",
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.67.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@10.8.2"
+}

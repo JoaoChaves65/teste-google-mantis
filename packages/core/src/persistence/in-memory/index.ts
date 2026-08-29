@@ -1,0 +1,7 @@
+export * from './base';
+export * from './user-repository';
+export * from './customer-repository';
+export * from './barber-repository';
+export * from './service-repository';
+export * from './appointment-repository';
+export * from './transaction-repository';
