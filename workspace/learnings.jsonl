@@ -45,3 +45,4 @@
 {"title": "Insecure Authentication - Missing Token Revocation Check", "code_paths": ["packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts:12-52"], "status": "SAMPLE_OR_TEST", "snapshot": "snap_20250829_01"}
 {"title": "Insecure Authentication - Missing Account Status Validation", "code_paths": ["packages/api-vulnerable/src/http/middleware/vulnerableAuth.ts:12-52"], "status": "SAMPLE_OR_TEST", "snapshot": "snap_20250829_01"}
 {"title": "Missing Refresh Token Rotation - No Token Rotation on Refresh", "code_paths": ["packages/api-vulnerable/src/auth/routes.ts:80-95"], "status": "SAMPLE_OR_TEST", "snapshot": "snap_20250829_01"}
+{"title": "SQL Injection in VulnerableAppointmentRepository.findById", "code_paths": ["packages/core/src/infrastructure/database/repositories/vulnerable-repository.ts:25-30"], "status": "VERIFIED_SECURE", "patch_base_snapshot": "snap_20250829_01", "snapshot": "snap_20250829_01"}
