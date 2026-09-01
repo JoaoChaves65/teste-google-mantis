@@ -45,10 +45,17 @@
       "pass_number": 2,
       "snapshot": "snap_20250829_01",
       "timestamp": "2026-08-29T19:00:02.998082Z"
+    },
+    {
+      "stage": "reproduce",
+      "action": "reproduced",
+      "details": "Reproduction status evaluated as reproduced using command: npx tsx workspace/reproducers/repro_finding-004.ts",
+      "pass_number": 2,
+      "timestamp": "2026-09-01T22:56:06.192104Z"
     }
   ],
   "reasoning": "Confirmed SQL injection in findByStatus method at line 46: template string with direct interpolation of user-supplied 'status' parameter into SQL query. Test confirms exploitability via sql-injection.test.ts lines 77-142 showing successful injection returning CONFIRMED appointments when querying for PENDING status.",
-  "repro_hints": "Trigger via GET /api/v1/appointments?status=PENDING' OR '1'='1' -- . Test confirms injection returns appointments of all statuses.",
+  "repro_hints": "sanitizers_used: none; build_profile: test; assertions_disabled: false; note: findByStatus uses text column (exploitable); payload PENDING' OR '1'='1' -- bypasses status filter and returns all appointments",
   "triage_checklist": {
     "ignore_hypothetical_misuse": {
       "outcome": "PASS"
@@ -188,5 +195,9 @@
     }
   },
   "outrage_commentary": "SQL injection in intentionally vulnerable demo code (educational lab). Outrage factor low since not production. Fixing prevents developers from copying insecure patterns.",
-  "executive_summary": "SQL Injection (CWE-89) in VulnerableAppointmentRepository.findByStatus. Impact 4 (systemic data exfiltration), Likelihood 4 (trivial, automated, tests confirm). SAMPLE_OR_TEST 0.4x scaling \u2192 3.2 MEDIUM. Not a production bug; fix demo code to prevent pattern copying."
+  "executive_summary": "SQL Injection (CWE-89) in VulnerableAppointmentRepository.findByStatus. Impact 4 (systemic data exfiltration), Likelihood 4 (trivial, automated, tests confirm). SAMPLE_OR_TEST 0.4x scaling \u2192 3.2 MEDIUM. Not a production bug; fix demo code to prevent pattern copying.",
+  "repro_status": "reproduced",
+  "repro_file_path": "workspace/reproducers/repro_finding-004.ts",
+  "run_command": "npx tsx workspace/reproducers/repro_finding-004.ts",
+  "repro_snapshot_id": "snap_20250829_01"
 }
